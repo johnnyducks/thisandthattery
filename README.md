@@ -42,6 +42,10 @@ Identical searches are cached at Vercel's edge for 2 minutes to save eBay API qu
 | `js/art.js` | Placeholder 1940s-poster product illustrations. Replace with real product images when the feeds are connected. |
 | `js/market.js` | **Marketplace interstitial**: a reusable, searchable carousel micro-app that works with any store through adapters. |
 | `api/ebay/search.js` | Vercel serverless function that proxies eBay's Browse API (keeps credentials off the page). Client code is in `api/_lib/ebay.js`. |
+| `catalog/pairings/*.json` | Pairing briefs: product types, angles, sources to crawl. |
+| `scripts/crawl.js` | Catalog crawler (run by `.github/workflows/catalog.yml`). |
+| `catalog.html`, `js/catalog.js` | The Back Room: private catalog browser, shortlist and export. |
+| `api/import.js` | Reads one product page into a catalog item ("Paste a link"). |
 | `css/styles.css` | 1940s picture-magazine styling and the extruded 3D box frames. |
 
 ### Story tokens
@@ -56,6 +60,38 @@ You can use these inside any story text in `issue.js`:
 `prose`, `feature` (frame + deep-dive spec sheet), `specimen` (annotated plate with numbered
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
+
+## Catalog pipeline (finding real products)
+
+How a pairing goes from idea to a catalog you pick from:
+
+1. **Brief:** `catalog/pairings/<pairing>.json` describes the pairing. It lists the product **types**
+   (claw, tack, genno…; round, sunburst, convex…) with the words that identify them, the editorial
+   **angles** (everyday, heirloom, vintage, oddball), and the **sources** (shops) to pull from.
+2. **Crawl:** on GitHub, go to **Actions → Build catalog → Run workflow**. For each source,
+   `scripts/crawl.js`:
+   - checks robots.txt
+   - uses the shop's public Shopify product feed if it has one
+   - otherwise reads the sitemap and only the product pages whose URLs look relevant
+   - reads each page's schema.org product data (name, brand, images, price, stock, shipping, returns)
+   - sorts every product into a type and an angle
+
+   Results are committed to `catalog/data/<pairing>.json`, along with a per-source report. It also
+   re-runs every Monday to refresh prices.
+3. **Narrow down:** open **`/catalog.html`** (not indexed by search engines). Filter by side, type,
+   angle, source, price or text. Star products into a shortlist with notes, and paste any product
+   link to add it by hand (through `/api/import`).
+4. **Export:** the shortlist exports in the same shape as `products` and `retailers` in `js/issue.js`,
+   so the chosen products drop straight into a story. Products with an `image` show the real photo
+   in the 3D frames instead of the placeholder art.
+
+Links stay as plain retailer URLs, so Skimlinks turns them into affiliate links when clicked.
+Some big retailers block crawlers; the report marks them as blocked. Those need an affiliate-network
+feed or pasted links.
+
+Run locally: `node scripts/crawl.js --pairing hammers-mirrors --sources schoolhouse --max-pages 20`
+
+Optional env var `IMPORT_TOKEN` locks `/api/import` behind `?token=…`.
 
 ## Marketplace interstitial (`js/market.js`)
 

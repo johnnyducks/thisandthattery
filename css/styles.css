@@ -785,3 +785,8 @@ figcaption {
 @media (prefers-reduced-motion: reduce) {
   .mcard, .mkt-lamp, .mcard.skel .mcard-img, .mcard.skel .mcard-body span { animation: none; }
 }
+
+/* real product photography inside the 3D frames (white-background retail shots) */
+.box-face.photo { background: #fff; }
+.box-face.photo img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; }
+.kit-swatch img { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 4px; }

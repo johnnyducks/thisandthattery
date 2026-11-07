@@ -1,0 +1,66 @@
+# Builds the product catalog for a pairing by crawling the sources in catalog/pairings/<pairing>.json.
+# Run it from GitHub: Actions → Build catalog → Run workflow. Results are committed to catalog/data/
+# and show up on /catalog.html after Vercel redeploys.
+name: Build catalog
+
+on:
+  workflow_dispatch:
+    inputs:
+      pairing:
+        description: "Pairing id (file name in catalog/pairings/)"
+        default: "hammers-mirrors"
+        required: true
+      sources:
+        description: "Only these source ids, comma-separated (blank = all)"
+        required: false
+      max_pages:
+        description: "Max product pages per sitemap source"
+        default: "120"
+        required: false
+  schedule:
+    - cron: "17 9 * * 1"   # Mondays: refresh prices and stock for the default pairing
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Crawl sources
+        env:
+          PAIRING: ${{ inputs.pairing || 'hammers-mirrors' }}
+          SOURCES: ${{ inputs.sources }}
+          MAX_PAGES: ${{ inputs.max_pages || '120' }}
+        run: |
+          args=(--pairing "$PAIRING" --max-pages "$MAX_PAGES")
+          if [ -n "$SOURCES" ]; then args+=(--sources "$SOURCES"); fi
+          node scripts/crawl.js "${args[@]}"
+      - name: Summarize
+        env:
+          PAIRING: ${{ inputs.pairing || 'hammers-mirrors' }}
+        run: |
+          node -e '
+            const r = require("./catalog/data/" + process.env.PAIRING + ".report.json");
+            const c = require("./catalog/data/" + process.env.PAIRING + ".json");
+            let md = `### Catalog: ${c.count} products\n\n| Source | Method | Kept | Status |\n|---|---|---|---|\n`;
+            for (const s of r.sources) md += `| ${s.name} | ${s.method || ""} | ${s.kept ?? ""} | ${s.blocked ? "blocked" : (s.errors || [])[0] || "ok"} |\n`;
+            require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY, md);
+          '
+      - name: Commit catalog
+        run: |
+          git config user.name "tt-catalog-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog/data
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Catalog: update ${{ inputs.pairing || 'hammers-mirrors' }}"
+          git push

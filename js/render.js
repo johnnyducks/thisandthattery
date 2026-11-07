@@ -21,7 +21,10 @@
     } catch (e) {}
   };
   const listeners = [];
-  const swatch = p => p.external && !p.art ? `<span class="swatch-x">${p.brand.slice(0, 1)}</span>` : TT_ART.render(p);
+  // real product photo when we have one, otherwise the placeholder poster art
+  const photo = p => `<img src="${p.image}" alt="${(p.brand + " " + p.name).replace(/"/g, "&quot;")}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
+  const art = p => p.image ? photo(p) : p.art ? TT_ART.render(p) : `<span class="swatch-x">${p.brand.slice(0, 1)}</span>`;
+  const swatch = art;
 
   /* ---------------- tokens ---------------- */
   function field(id, path) {
@@ -49,7 +52,7 @@
     const first = !anchored.has(id); anchored.add(id);
     return `<figure class="box ${size} ${p.kind}" ${first ? `id="p-${id}"` : ""} data-id="${id}" style="--tilt:${tilt}deg">
       <div class="box-3d">
-        <div class="box-face">${TT_ART.render(p)}</div>
+        <div class="box-face ${p.image ? "photo" : ""}">${art(p)}</div>
         <span class="box-corner tl"></span><span class="box-corner tr"></span><span class="box-corner bl"></span><span class="box-corner br"></span>
       </div>
       <div class="tag"><span class="tag-hole"></span><b>${money(p.price)}</b><small>${p.shipping.split(",")[0]}</small></div>
