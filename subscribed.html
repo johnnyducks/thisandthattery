@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Subscription · This &amp; Thattery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;1,900&family=Playfair+Display:ital,wght@1,900&family=Libre+Caslon+Text:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { display: grid; min-height: 100vh; place-items: center; background: var(--charcoal); color: var(--cream); padding: 24px; }
+    .card { max-width: 560px; text-align: center; }
+    .card .tt { color: var(--cream); font-size: 90px; }
+    .card h1 { margin: 24px 0 10px; font: italic 900 clamp(36px, 6vw, 56px)/1 var(--f-display); }
+    .card p { font: italic 400 19px/1.5 var(--f-body); opacity: .85; margin: 0 0 30px; }
+    .card a { display: inline-block; background: var(--orange); color: var(--cream); text-decoration: none; padding: 16px 28px; border-radius: 999px;
+      font: 800 14px/1 var(--f-logo); letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 5px 0 var(--orange-dk); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="tt">TT</div>
+    <h1 id="h">You're in.</h1>
+    <p id="p">Your subscription is confirmed. The next issue of This &amp; Thattery will find you.</p>
+    <a href="index.html">Back to the issue →</a>
+  </main>
+  <script>
+    var s = new URLSearchParams(location.search).get("status");
+    var copy = {
+      expired: ["That link has expired.", "Confirmation links last three days. Sign up again and we'll send a fresh one."],
+      error: ["Something went sideways.", "We couldn't confirm your subscription just now. Please try the link again in a minute."]
+    }[s];
+    if (copy) { document.getElementById("h").textContent = copy[0]; document.getElementById("p").textContent = copy[1]; }
+  </script>
+</body>
+</html>

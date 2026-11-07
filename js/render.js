@@ -154,7 +154,7 @@
         <span class="issue">${I.date} · 10¢</span>
       </div>
       <div class="wordmark">THIS &amp; THATTERY</div>
-      <nav class="nav"><a href="#objects">Objects</a><i>/</i><a href="#stories">Stories</a><i>/</i><a href="#kit">Shop</a></nav>
+      <nav class="nav"><a href="#objects">Objects</a><i>/</i><a href="#stories">Stories</a><i>/</i><a href="#kit">Shop</a>${window.TT_SPONSORS?.active ? `<i>/</i><a href="sponsor.html?brand=${TT_SPONSORS.active}">Brands</a>` : ""}</nav>
       <div class="cover-main">
         <div class="cover-box a">${box(hero[0], { tilt: -8, size: "lg" })}</div>
         <div class="cover-title">
@@ -210,9 +210,6 @@
     </section>`;
   }
 
-  function rail() {
-    return `<nav class="rail" aria-label="Chapters">${I.chapters.filter(c => !c.module).map(c => `<a href="#ch-${c.id}" data-rail="${c.id}"><span>${c.numeral}</span><em>${c.title}</em></a>`).join("")}<a href="#kit" data-rail="kit"><span>✦</span><em>Toolbox</em></a></nav>`;
-  }
 
   function tray() {
     return `<div class="tray" data-open="false">
@@ -222,9 +219,12 @@
   }
 
   const app = $("#app");
+  const SP = window.TT_SPONSORS, spon = SP && SP.brands[SP.active];
+  const sponsorLink = spon ? { href: `sponsor.html?brand=${SP.active}`, label: spon.name, kicker: spon.paid ? "Sponsor" : "Featured" } : null;
   app.innerHTML = cover() + ticker() + `<main id="stories">${I.chapters.map(chapter).join("")}${kitSection()}</main>` +
-    `<footer class="foot"><div class="tt">TT</div><p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
-    rail() + tray();
+    `<section id="newsletter"></section>` +
+    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
+    tray();
 
   /* ---------------- kit rendering ---------------- */
   function groups() {
@@ -307,16 +307,12 @@
     });
   }
 
-  /* ---------------- reveal + rail ---------------- */
+  /* ---------------- reveal ---------------- */
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { rootMargin: "0px 0px -10% 0px" });
   $$(".box, .prose, .pull, .ticket, .dive, .duel-mid, .chapter-head").forEach(el => { el.classList.add("rv"); io.observe(el); });
 
-  const railIO = new IntersectionObserver(es => es.forEach(en => {
-    if (en.isIntersecting) { const id = en.target.dataset.ch || "kit"; $$("[data-rail]").forEach(a => a.classList.toggle("on", a.dataset.rail === id)); }
-  }), { rootMargin: "-45% 0px -50% 0px" });
-  $$(".chapter, .kit-final").forEach(s => railIO.observe(s));
   const coverIO = new IntersectionObserver(([en]) => document.body.classList.toggle("past-cover", !en.isIntersecting));
-  coverIO.observe($(".cover"));
+  coverIO.observe($(".cover .nav"));   // the thin nav bar appears once the masthead nav scrolls away
 
   /* ---------------- public kit API (used by marketplace modules) ---------------- */
   window.TT_KIT = {
@@ -334,6 +330,18 @@
     const el = document.querySelector(`[data-module="${c.id}"]`);
     if (el && window.TT_MARKET) TT_MARKET.mount(el, { id: c.id, ...c.module });
   });
+
+  /* ---------------- site chrome: sticky nav + newsletter ---------------- */
+  if (window.TT_SITE) {
+    TT_SITE.nav({
+      sponsor: sponsorLink,
+      links: [
+        ...I.chapters.filter(c => !c.module).map(c => ({ href: `#ch-${c.id}`, id: `ch-${c.id}`, html: `<b>${c.numeral}</b><span>${c.title}</span>` })),
+        { href: "#kit", id: "kit", html: `<b>✦</b><span>Toolbox</span>` }
+      ]
+    });
+    TT_SITE.newsletter(document.getElementById("newsletter"), { source: "issue-" + I.number });
+  }
 
   syncKit();
 })();
