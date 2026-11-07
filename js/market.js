@@ -162,7 +162,7 @@
       id: "ebay", label: "eBay",
       capabilities: { zip: true, radius: true, pickup: true, auction: true, sorts: ["best", "ending", "priceAsc", "priceDesc", "distance"] },
       async search(params) {
-        if (!opts.endpoint) return sample.search(params);
+        if (!opts.endpoint || location.protocol === "file:") return sample.search(params);   // no API when opened as a file
         try {
           const qs = new URLSearchParams(Object.entries(params).filter(([, v]) => v !== "" && v != null && v !== false));
           const res = await fetch(`${opts.endpoint}?${qs}`, { headers: { Accept: "application/json" } });
