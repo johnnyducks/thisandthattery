@@ -1,0 +1,307 @@
+{
+  "pairing": "hammers-mirrors",
+  "ranAt": "2026-11-07T17:52:42.135Z",
+  "sources": [
+    {
+      "id": "leevalley",
+      "name": "Lee Valley",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 429: https://www.leevalley.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:49:06.868Z",
+      "blocked": true,
+      "candidates": 0
+    },
+    {
+      "id": "hidatool",
+      "name": "Hida Tool",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 404: https://hidatool.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:49:06.871Z",
+      "candidates": 0
+    },
+    {
+      "id": "japanwood",
+      "name": "Japan Woodworker",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:06.870Z",
+      "candidates": 0
+    },
+    {
+      "id": "rockler",
+      "name": "Rockler",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "robots: fetch failed",
+        "sitemap 404: https://www.rockler.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:49:07.191Z",
+      "candidates": 0
+    },
+    {
+      "id": "vaughan",
+      "name": "Vaughan & Bushnell",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:08.171Z",
+      "candidates": 0
+    },
+    {
+      "id": "garrettwade",
+      "name": "Garrett Wade",
+      "method": "shopify-feed",
+      "fetched": 5,
+      "found": 1113,
+      "kept": 16,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:06.826Z"
+    },
+    {
+      "id": "highland",
+      "name": "Highland Woodworking",
+      "method": "shopify-feed",
+      "fetched": 12,
+      "found": 3000,
+      "kept": 23,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:07.576Z"
+    },
+    {
+      "id": "ottofrei",
+      "name": "Otto Frei",
+      "method": "sitemap",
+      "fetched": 11,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 403: https://www.ottofrei.com/es/sitemap_products_1.xml?from=7664265461974&to=7851722211542"
+      ],
+      "startedAt": "2026-11-07T17:49:25.342Z",
+      "blocked": true,
+      "candidates": 319
+    },
+    {
+      "id": "acehardware",
+      "name": "Ace Hardware",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 403: https://www.acehardware.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:49:36.231Z",
+      "blocked": true,
+      "candidates": 0
+    },
+    {
+      "id": "schoolhouse",
+      "name": "Schoolhouse",
+      "method": "shopify-feed",
+      "fetched": 2,
+      "found": 265,
+      "kept": 9,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:36.602Z"
+    },
+    {
+      "id": "mcgee",
+      "name": "McGee & Co.",
+      "method": "shopify-feed",
+      "fetched": 12,
+      "found": 2928,
+      "kept": 77,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:38.919Z"
+    },
+    {
+      "id": "luluandgeorgia",
+      "name": "Lulu and Georgia",
+      "method": "shopify-feed",
+      "fetched": 3,
+      "found": 749,
+      "kept": 42,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:56.162Z"
+    },
+    {
+      "id": "amber",
+      "name": "Shoppe Amber Interiors",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "feed: Unexpected token '<', \"<!doctype \"... is not valid JSON"
+      ],
+      "startedAt": "2026-11-07T17:50:00.570Z",
+      "candidates": 0
+    },
+    {
+      "id": "article",
+      "name": "Article",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:50:03.253Z",
+      "candidates": 0
+    },
+    {
+      "id": "rejuvenation",
+      "name": "Rejuvenation",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 403: https://www.rejuvenation.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:50:03.969Z",
+      "blocked": true,
+      "candidates": 0
+    },
+    {
+      "id": "westelm",
+      "name": "West Elm",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 403: https://www.westelm.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:50:04.439Z",
+      "blocked": true,
+      "candidates": 0
+    },
+    {
+      "id": "cb2",
+      "name": "CB2",
+      "method": "sitemap",
+      "fetched": 2,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 403: https://www.cb2.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-07T17:50:04.783Z",
+      "blocked": true,
+      "candidates": 0
+    },
+    {
+      "id": "simplehuman",
+      "name": "simplehuman",
+      "method": "shopify-feed",
+      "fetched": 2,
+      "found": 350,
+      "kept": 24,
+      "errors": [],
+      "startedAt": "2026-11-07T17:50:05.081Z"
+    },
+    {
+      "id": "uline",
+      "name": "Uline",
+      "method": "sitemap",
+      "fetched": 8,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap 406: https://www.uline.com/sitemap-us-product.xml.gz",
+        "sitemap 406: https://www.uline.com/sitemap1.xml.gz",
+        "sitemap 406: https://www.uline.com/sitemap-us-homepage.xml.gz",
+        "sitemap 406: https://www.uline.com/sitemap-us-class.xml.gz",
+        "sitemap 406: https://www.uline.com/sitemap-us-group.xml.gz",
+        "sitemap 406: https://www.uline.com/sitemap-us-subgroup.xml.gz"
+      ],
+      "startedAt": "2026-11-07T17:50:07.096Z",
+      "candidates": 0
+    },
+    {
+      "id": "ebay",
+      "name": "eBay",
+      "method": "api",
+      "fetched": 0,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:50:09.214Z",
+      "note": "Via our /api/ebay/search once keys are approved."
+    },
+    {
+      "id": "etsy",
+      "name": "Etsy",
+      "method": "manual",
+      "fetched": 0,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:50:09.214Z",
+      "note": "Crawling Etsy isn't allowed; Etsy has an approval-gated API. Paste links via /import for now."
+    },
+    {
+      "id": "chairish",
+      "name": "Chairish",
+      "method": "manual",
+      "fetched": 0,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-07T17:50:09.214Z",
+      "note": "Vintage mirrors; paste links via /import."
+    },
+    {
+      "id": "centaurforge",
+      "name": "Centaur Forge",
+      "method": "sitemap",
+      "fetched": 114,
+      "found": 112,
+      "kept": 88,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:13.176Z",
+      "candidates": 112
+    },
+    {
+      "id": "blacksmithsdepot",
+      "name": "Blacksmiths Depot",
+      "method": "sitemap",
+      "fetched": 108,
+      "found": 106,
+      "kept": 97,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:09.565Z",
+      "candidates": 106
+    },
+    {
+      "id": "estwing",
+      "name": "Estwing",
+      "method": "sitemap",
+      "fetched": 121,
+      "found": 116,
+      "kept": 71,
+      "errors": [],
+      "startedAt": "2026-11-07T17:49:08.272Z",
+      "candidates": 116
+    }
+  ]
+}
