@@ -12,8 +12,26 @@ terms) into the text.
 No build step. Open `index.html` in a browser, or serve the folder:
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000   # static only; the Swap Meet uses sample data
+npx vercel dev                # static + /api functions, reads env vars from Vercel
 ```
+
+## Deploy (Vercel)
+
+1. Import the repo in Vercel. Framework Preset **Other**, no build command, output directory empty.
+2. Add environment variables (Settings → Environment Variables):
+
+   | Name | Value |
+   | --- | --- |
+   | `EBAY_CLIENT_ID` | App ID (Client ID) from developer.ebay.com, production keyset |
+   | `EBAY_CLIENT_SECRET` | Cert ID (Client Secret) |
+   | `EPN_CAMPAIGN_ID` | optional: eBay Partner Network campaign ID, so links earn commission |
+   | `EBAY_ENV` | optional: `sandbox` to test against eBay's sandbox |
+
+3. Redeploy. The Swap Meet's status label changes from "Sample data · feed offline" to "On air".
+
+Without the keys the function returns 503 and the module quietly uses sample listings.
+Identical searches are cached at Vercel's edge for 2 minutes to save eBay API quota.
 
 ## How it's put together
 
@@ -23,7 +41,7 @@ python3 -m http.server 8000
 | `js/render.js` | Turns the issue data into the page. Also runs the "kit" (cart-like tray grouped by retailer, with free-shipping progress). |
 | `js/art.js` | Placeholder 1940s-poster product illustrations. Replace with real product images when the feeds are connected. |
 | `js/market.js` | **Marketplace interstitial**: a reusable, searchable carousel micro-app that works with any store through adapters. |
-| `server/ebay-proxy.example.js` | Example server proxy for eBay's Browse API (keeps credentials off the page). Not yet tested against live eBay. |
+| `api/ebay/search.js` | Vercel serverless function that proxies eBay's Browse API (keeps credentials off the page). Client code is in `api/_lib/ebay.js`. |
 | `css/styles.css` | 1940s picture-magazine styling and the extruded 3D box frames. |
 
 ### Story tokens
@@ -72,8 +90,8 @@ TT_MARKET.register("etsy", opts => ({
 }));
 ```
 
-**eBay:** the Browse API needs an OAuth app token, so requests go through a small server proxy
-(`server/ebay-proxy.example.js`). It also passes the eBay Partner Network campaign ID so links
+**eBay:** the Browse API needs an OAuth app token, so requests go through a Vercel function
+(`api/ebay/search.js`). It also passes the eBay Partner Network campaign ID so links
 come back as affiliate links, and the buyer's zip code for shipping estimates. Note that eBay's
 radius search works through local pickup: it finds listings offering pickup within N miles. If
 the endpoint is unset or fails, the module falls back to sample data and its status light says so.

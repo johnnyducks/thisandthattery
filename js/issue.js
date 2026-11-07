@@ -169,7 +169,7 @@ window.TT_ISSUE = {
       module: {
         // Reusable marketplace interstitial (js/market.js). Swap `platform` for any registered adapter.
         platform: "ebay",
-        adapter: { endpoint: "" },            // e.g. "/api/ebay/search" once the proxy is deployed; empty = sample data
+        adapter: { endpoint: "/api/ebay/search" },   // Vercel function (api/ebay/search.js); falls back to sample data if unavailable
         kicker: "Intermission",
         title: "The Swap Meet",
         consoleName: "TT Swap Meet",

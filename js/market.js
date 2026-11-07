@@ -153,7 +153,7 @@
      the Browse API needs an OAuth app token that must stay server-side).
      Proxy contract: GET {endpoint}?q&zip&radius&pickupOnly&format&sort
                      -> { total, items: [normalized item] }
-     See server/ebay-proxy.example.js for the eBay-side mapping.
+     See api/_lib/ebay.js for the eBay-side mapping (Vercel function).
      Falls back to sample data when no endpoint is configured or it fails.
      ------------------------------------------------------------------ */
   const EbayAdapter = (opts = {}) => {
@@ -290,7 +290,7 @@
           <div class="mcard-price">${money(it.price, it.currency)}${auction ? `<small>${it.bids || 0} bid${it.bids === 1 ? "" : "s"}</small>` : ""}</div>
           <ul class="mcard-meta">
             <li>${ship}</li>
-            <li>${esc([loc.city, loc.region].filter(Boolean).join(", "))}${loc.distanceMi != null ? ` · <b>${loc.distanceMi} mi</b>` : ""}${it.localPickup ? ` <span class="pickup">Pickup</span>` : ""}</li>
+            <li>${esc([loc.city, loc.region].filter(Boolean).join(", ") || loc.postal || "")}${loc.distanceMi != null ? ` · <b>${loc.distanceMi} mi</b>` : ""}${it.localPickup ? ` <span class="pickup">Pickup</span>` : ""}</li>
             <li class="seller">${esc(it.seller?.name || "")}${it.seller?.feedbackPct ? ` · ${it.seller.feedbackPct}%` : ""}${it.watchers ? ` · ${it.watchers} watching` : ""}</li>
           </ul>
           <div class="mcard-actions">
