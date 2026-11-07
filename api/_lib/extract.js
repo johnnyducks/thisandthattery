@@ -100,9 +100,34 @@ function extractProduct(html, url) {
   item.price ??= num(meta(html, "product:price:amount") || meta(html, "og:price:amount"));
   item.currency ||= meta(html, "product:price:currency") || meta(html, "og:price:currency");
   item.description ||= clip(meta(html, "og:description") || meta(html, "description")) || undefined;
+  item.price ??= priceFallback(html);
+  item.title = stripSiteSuffix(item.title, [meta(html, "og:site_name"), item.brand]);
   item.image = item.images?.[0];
   item.confidence = p ? "structured" : item.price != null ? "meta" : "weak";
   return prune(item);
+}
+
+/* price from microdata / data attributes / inline JSON, for pages without schema.org offers */
+function priceFallback(html) {
+  const tries = [
+    /itemprop=["']price["'][^>]*content=["']([\d.,]+)["']/i,
+    /content=["']([\d.,]+)["'][^>]*itemprop=["']price["']/i,
+    /itemprop=["']price["'][^>]*>\s*\$?\s*([\d.,]+)/i,
+    /data-(?:product-)?price(?:-amount|-without-tax)?=["']\$?([\d.,]+)["']/i,
+    /"priceCurrency"\s*:\s*"[A-Z]{3}"[^{}]{0,200}?"price"\s*:\s*"?([\d.,]+)/,
+    /"price"\s*:\s*"?([\d.,]+)"?[^{}]{0,200}?"priceCurrency"/
+  ];
+  for (const re of tries) { const m = html.match(re); const n = m && num(m[1]); if (n && n > 0 && n < 100000) return n; }
+  return undefined;
+}
+/* "Drilling Hammer - Estwing" -> "Drilling Hammer" */
+function stripSiteSuffix(title, names) {
+  if (!title) return title;
+  for (const n of names.filter(Boolean)) {
+    const re = new RegExp(`\\s*[-|–—:]\\s*${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*$`, "i");
+    if (re.test(title)) return title.replace(re, "");
+  }
+  return title.replace(/\s*\|\s*[^|]{2,40}$/, "");   // generic " | Category" tail
 }
 
 /* ---------- Shopify /products.json ---------- */
@@ -126,11 +151,13 @@ function fromShopify(prod, base) {
 function prune(o) { for (const k of Object.keys(o)) if (o[k] === undefined || o[k] === "" || (Array.isArray(o[k]) && !o[k].length)) delete o[k]; return o; }
 
 /* ---------- polite fetching ---------- */
-async function get(url, { accept = "text/html,application/xhtml+xml", timeout = 15000 } = {}) {
+async function get(url, { accept = "text/html,application/xhtml+xml,*/*;q=0.8", timeout = 15000 } = {}) {
   const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), timeout);
   try {
     const res = await fetch(url, { headers: { "User-Agent": UA, Accept: accept, "Accept-Language": "en-US,en;q=0.8" }, redirect: "follow", signal: ctl.signal });
-    const body = await res.text();
+    const buf = Buffer.from(await res.arrayBuffer());
+    // gzipped sitemap files (sitemap.xml.gz) arrive as raw gzip, not Content-Encoding
+    const body = buf[0] === 0x1f && buf[1] === 0x8b ? require("zlib").gunzipSync(buf).toString("utf8") : buf.toString("utf8");
     return { ok: res.ok, status: res.status, url: res.url || url, body, type: res.headers.get("content-type") || "" };
   } finally { clearTimeout(t); }
 }
