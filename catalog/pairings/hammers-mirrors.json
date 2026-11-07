@@ -51,8 +51,7 @@
       "side": "this",
       "label": "Claw hammers",
       "match": [
-        "claw hammer",
-        "curved claw",
+        "claw",
         "nail hammer"
       ],
       "story": "The everyday hero. Smooth face vs. milled, steel vs. hickory."
@@ -62,10 +61,9 @@
       "side": "this",
       "label": "Framing & rip hammers",
       "match": [
-        "framing hammer",
+        "framing",
         "rip hammer",
-        "straight claw",
-        "titanium hammer"
+        "titanium"
       ],
       "story": "The heavy hand. Waffle faces, titanium, construction lore."
     },
@@ -74,10 +72,11 @@
       "side": "this",
       "label": "Tack & upholstery",
       "match": [
-        "tack hammer",
-        "upholstery hammer",
-        "magnetic hammer",
-        "cabinetmaker"
+        "tack",
+        "upholstery",
+        "upholsterer",
+        "cabinetmaker's hammer",
+        "magnetic hammer"
       ],
       "story": "Small hammers for small holes. Picture hooks."
     },
@@ -89,8 +88,10 @@
         "mallet",
         "dead blow",
         "dead-blow",
-        "soft face hammer",
-        "soft-faced"
+        "soft face",
+        "soft-face",
+        "rawhide",
+        "nylon hammer"
       ],
       "story": "Hitting without marking. Next to glass, this matters."
     },
@@ -101,8 +102,9 @@
       "match": [
         "ball peen",
         "ball-peen",
-        "machinist hammer",
-        "engineer hammer"
+        "ball pein",
+        "machinist",
+        "engineer"
       ],
       "story": "Metalworking's round-headed workhorse."
     },
@@ -113,9 +115,8 @@
       "match": [
         "genno",
         "gennou",
-        "japanese hammer",
-        "kanazuchi",
-        "chisel hammer"
+        "japanese",
+        "kanazuchi"
       ],
       "story": "Heirloom angle: one flat face, one domed face, a handle you fit yourself."
     },
@@ -126,13 +127,27 @@
       "match": [
         "cross peen",
         "cross-peen",
+        "cross pein",
         "straight peen",
-        "rounding hammer",
-        "forging hammer",
+        "straight pein",
+        "rounding",
+        "forging",
         "blacksmith",
+        "farrier",
+        "driving hammer",
         "planishing",
-        "chasing hammer",
-        "raising hammer"
+        "chasing",
+        "raising",
+        "repousse",
+        "german pattern",
+        "swedish pattern",
+        "french pattern",
+        "czech",
+        "nordic",
+        "habbe",
+        "picard",
+        "peddinghaus",
+        "hofi"
       ],
       "story": "Hammers that make other things, including hammers."
     },
@@ -144,15 +159,23 @@
         "rock pick",
         "geologist",
         "rock hammer",
-        "brick hammer",
+        "prospecting",
+        "brick",
         "bricklayer",
-        "drywall hammer",
+        "mason",
+        "stone",
+        "drywall",
         "cobbler",
         "shoemaker",
-        "riveting hammer",
+        "riveting",
         "sledge",
         "club hammer",
-        "drilling hammer"
+        "drilling hammer",
+        "welding",
+        "chipping",
+        "scaling",
+        "hammertooth",
+        "bush hammer"
       ],
       "story": "The oddballs: the geologist's pick, the cobbler's hammer."
     },
@@ -166,54 +189,24 @@
       "story": "Catch-all; sort later."
     },
     {
-      "id": "round",
+      "id": "vanity",
       "side": "that",
-      "label": "Round wall mirrors",
+      "label": "Vanity, hand & shaving",
       "match": [
-        "round mirror",
-        "round wall mirror",
-        "circle mirror",
-        "circular mirror"
+        "vanity",
+        "hand mirror",
+        "makeup",
+        "magnifying",
+        "magnification",
+        "shaving",
+        "compact",
+        "tabletop",
+        "pocket",
+        "detail mirror",
+        "sensor mirror",
+        "travel mirror"
       ],
-      "story": "The default modern mirror. Frame material is the story."
-    },
-    {
-      "id": "arched",
-      "side": "that",
-      "label": "Arched mirrors",
-      "match": [
-        "arch mirror",
-        "arched mirror",
-        "arched floor",
-        "arch floor"
-      ],
-      "story": "Doorway-shaped; the 2020s favorite."
-    },
-    {
-      "id": "floor",
-      "side": "that",
-      "label": "Floor & full-length",
-      "match": [
-        "floor mirror",
-        "full length",
-        "full-length",
-        "leaner mirror",
-        "leaning mirror",
-        "standing mirror",
-        "cheval"
-      ],
-      "story": "Heavy glass: the hanging problem."
-    },
-    {
-      "id": "sunburst",
-      "side": "that",
-      "label": "Sunburst & starburst",
-      "match": [
-        "sunburst",
-        "starburst",
-        "sun mirror"
-      ],
-      "story": "Hollywood Regency, 1940s–60s glamour."
+      "story": "Small mirrors that stay close to the face."
     },
     {
       "id": "convex",
@@ -223,10 +216,22 @@
         "convex",
         "butler",
         "girandole",
-        "bullseye mirror",
-        "safety mirror"
+        "bullseye",
+        "safety",
+        "dome"
       ],
       "story": "The mirror that sees the whole room, from Federal parlours to warehouse corners."
+    },
+    {
+      "id": "sunburst",
+      "side": "that",
+      "label": "Sunburst & starburst",
+      "match": [
+        "sunburst",
+        "starburst",
+        "sun"
+      ],
+      "story": "Hollywood Regency, 1940s–60s glamour."
     },
     {
       "id": "ornate",
@@ -239,27 +244,53 @@
         "rococo",
         "ornate",
         "venetian",
-        "antique mirror",
-        "carved mirror",
-        "french mirror"
+        "antique",
+        "carved",
+        "french",
+        "louis",
+        "regency",
+        "gold leaf"
       ],
       "story": "Gold leaf and seven years' bad luck."
     },
     {
-      "id": "vanity",
+      "id": "arched",
       "side": "that",
-      "label": "Vanity, hand & shaving",
+      "label": "Arched mirrors",
       "match": [
-        "vanity mirror",
-        "hand mirror",
-        "makeup mirror",
-        "magnifying mirror",
-        "shaving mirror",
-        "compact mirror",
-        "tabletop mirror",
-        "pocket mirror"
+        "arch",
+        "arched",
+        "arc"
       ],
-      "story": "Small mirrors that stay close to the face."
+      "story": "Doorway-shaped; the 2020s favorite."
+    },
+    {
+      "id": "floor",
+      "side": "that",
+      "label": "Floor & full-length",
+      "match": [
+        "floor",
+        "full length",
+        "full-length",
+        "leaner",
+        "leaning",
+        "standing",
+        "cheval",
+        "mantel"
+      ],
+      "story": "Heavy glass: the hanging problem."
+    },
+    {
+      "id": "round",
+      "side": "that",
+      "label": "Round wall mirrors",
+      "match": [
+        "round",
+        "circle",
+        "circular",
+        "oval"
+      ],
+      "story": "The default modern mirror. Frame material is the story."
     },
     {
       "id": "mirror",
@@ -292,6 +323,58 @@
     "mirror film",
     "decal",
     "sticker"
+  ],
+  "requireInTitle": {
+    "this": [
+      "hammer",
+      "mallet",
+      "genno",
+      "gennou",
+      "kanazuchi",
+      "sledge",
+      "rock pick",
+      "peen"
+    ],
+    "that": [
+      "mirror"
+    ]
+  },
+  "rejectTitle": [
+    "replacement handle",
+    "handle for",
+    "hammer handle",
+    "handles only",
+    "workbench",
+    "book",
+    "dvd",
+    "video",
+    "ornament",
+    "wallpaper",
+    "wall art",
+    "art print",
+    "print",
+    "poster",
+    "gift card",
+    "sharpening",
+    "anvil",
+    "tongs",
+    "vise",
+    "hardy",
+    "apron",
+    "glove",
+    "holster",
+    "hanger",
+    "hook",
+    "bracket",
+    "hammock",
+    "nail set",
+    "nails",
+    "screws",
+    "paint",
+    "lamp",
+    "sconce",
+    "wedges",
+    "handle wedge"
   ],
   "sources": [
     {
