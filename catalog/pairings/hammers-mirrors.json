@@ -1,0 +1,583 @@
+{
+  "id": "hammers-mirrors",
+  "this": "Hammers",
+  "that": "Mirrors",
+  "premise": "One makes the hole. The other shows you what you've done.",
+  "angles": {
+    "everyday": {
+      "label": "Everyday workhorse",
+      "note": "Under-$40 hammers and under-$250 mirrors people actually buy for a Saturday project."
+    },
+    "heirloom": {
+      "label": "Heirloom / high-end",
+      "note": "Hand-forged, Japanese, Swedish, solid-brass, hand-gilded: things with a maker and a story."
+    },
+    "vintage": {
+      "label": "Vintage & historical",
+      "note": "Old tools with patina, mid-century and antique mirrors. Mostly eBay / Etsy / Chairish."
+    },
+    "oddball": {
+      "label": "Oddballs",
+      "note": "Geologist's picks, chasing hammers, convex safety mirrors: the quirky picks the story loves."
+    }
+  },
+  "priceTiers": {
+    "hammer": {
+      "heirloom": 80
+    },
+    "mirror": {
+      "heirloom": 600
+    }
+  },
+  "urlKeywords": [
+    "hammer",
+    "mallet",
+    "peen",
+    "genno",
+    "gennou",
+    "kanazuchi",
+    "sledge",
+    "rock-pick",
+    "mirror",
+    "sunburst",
+    "starburst",
+    "convex",
+    "cheval",
+    "girandole"
+  ],
+  "types": [
+    {
+      "id": "claw",
+      "side": "this",
+      "label": "Claw hammers",
+      "match": [
+        "claw hammer",
+        "curved claw",
+        "nail hammer"
+      ],
+      "story": "The everyday hero. Smooth face vs. milled, steel vs. hickory."
+    },
+    {
+      "id": "framing",
+      "side": "this",
+      "label": "Framing & rip hammers",
+      "match": [
+        "framing hammer",
+        "rip hammer",
+        "straight claw",
+        "titanium hammer"
+      ],
+      "story": "The heavy hand. Waffle faces, titanium, construction lore."
+    },
+    {
+      "id": "tack",
+      "side": "this",
+      "label": "Tack & upholstery",
+      "match": [
+        "tack hammer",
+        "upholstery hammer",
+        "magnetic hammer",
+        "cabinetmaker"
+      ],
+      "story": "Small hammers for small holes. Picture hooks."
+    },
+    {
+      "id": "mallet",
+      "side": "this",
+      "label": "Mallets & dead-blows",
+      "match": [
+        "mallet",
+        "dead blow",
+        "dead-blow",
+        "soft face hammer",
+        "soft-faced"
+      ],
+      "story": "Hitting without marking. Next to glass, this matters."
+    },
+    {
+      "id": "ballpeen",
+      "side": "this",
+      "label": "Ball-peen & machinist",
+      "match": [
+        "ball peen",
+        "ball-peen",
+        "machinist hammer",
+        "engineer hammer"
+      ],
+      "story": "Metalworking's round-headed workhorse."
+    },
+    {
+      "id": "japanese",
+      "side": "this",
+      "label": "Japanese hammers (genno)",
+      "match": [
+        "genno",
+        "gennou",
+        "japanese hammer",
+        "kanazuchi",
+        "chisel hammer"
+      ],
+      "story": "Heirloom angle: one flat face, one domed face, a handle you fit yourself."
+    },
+    {
+      "id": "smithing",
+      "side": "this",
+      "label": "Blacksmith & forging",
+      "match": [
+        "cross peen",
+        "cross-peen",
+        "straight peen",
+        "rounding hammer",
+        "forging hammer",
+        "blacksmith",
+        "planishing",
+        "chasing hammer",
+        "raising hammer"
+      ],
+      "story": "Hammers that make other things, including hammers."
+    },
+    {
+      "id": "specialty",
+      "side": "this",
+      "label": "Specialty & oddball",
+      "match": [
+        "rock pick",
+        "geologist",
+        "rock hammer",
+        "brick hammer",
+        "bricklayer",
+        "drywall hammer",
+        "cobbler",
+        "shoemaker",
+        "riveting hammer",
+        "sledge",
+        "club hammer",
+        "drilling hammer"
+      ],
+      "story": "The oddballs: the geologist's pick, the cobbler's hammer."
+    },
+    {
+      "id": "hammer",
+      "side": "this",
+      "label": "Other hammers",
+      "match": [
+        "hammer"
+      ],
+      "story": "Catch-all; sort later."
+    },
+    {
+      "id": "round",
+      "side": "that",
+      "label": "Round wall mirrors",
+      "match": [
+        "round mirror",
+        "round wall mirror",
+        "circle mirror",
+        "circular mirror"
+      ],
+      "story": "The default modern mirror. Frame material is the story."
+    },
+    {
+      "id": "arched",
+      "side": "that",
+      "label": "Arched mirrors",
+      "match": [
+        "arch mirror",
+        "arched mirror",
+        "arched floor",
+        "arch floor"
+      ],
+      "story": "Doorway-shaped; the 2020s favorite."
+    },
+    {
+      "id": "floor",
+      "side": "that",
+      "label": "Floor & full-length",
+      "match": [
+        "floor mirror",
+        "full length",
+        "full-length",
+        "leaner mirror",
+        "leaning mirror",
+        "standing mirror",
+        "cheval"
+      ],
+      "story": "Heavy glass: the hanging problem."
+    },
+    {
+      "id": "sunburst",
+      "side": "that",
+      "label": "Sunburst & starburst",
+      "match": [
+        "sunburst",
+        "starburst",
+        "sun mirror"
+      ],
+      "story": "Hollywood Regency, 1940s–60s glamour."
+    },
+    {
+      "id": "convex",
+      "side": "that",
+      "label": "Convex & butler's",
+      "match": [
+        "convex",
+        "butler",
+        "girandole",
+        "bullseye mirror",
+        "safety mirror"
+      ],
+      "story": "The mirror that sees the whole room, from Federal parlours to warehouse corners."
+    },
+    {
+      "id": "ornate",
+      "side": "that",
+      "label": "Ornate, gilt & antique",
+      "match": [
+        "gilt",
+        "gilded",
+        "baroque",
+        "rococo",
+        "ornate",
+        "venetian",
+        "antique mirror",
+        "carved mirror",
+        "french mirror"
+      ],
+      "story": "Gold leaf and seven years' bad luck."
+    },
+    {
+      "id": "vanity",
+      "side": "that",
+      "label": "Vanity, hand & shaving",
+      "match": [
+        "vanity mirror",
+        "hand mirror",
+        "makeup mirror",
+        "magnifying mirror",
+        "shaving mirror",
+        "compact mirror",
+        "tabletop mirror",
+        "pocket mirror"
+      ],
+      "story": "Small mirrors that stay close to the face."
+    },
+    {
+      "id": "mirror",
+      "side": "that",
+      "label": "Other mirrors",
+      "match": [
+        "mirror"
+      ],
+      "story": "Catch-all; sort later."
+    }
+  ],
+  "exclude": [
+    "hammer drill",
+    "rotary hammer",
+    "demolition hammer",
+    "hammered",
+    "hammertone",
+    "hammer tacker",
+    "mirrored",
+    "mirror cabinet",
+    "medicine cabinet",
+    "rear view",
+    "rearview",
+    "side mirror",
+    "phone case",
+    "screen protector",
+    "mirror ball",
+    "disco ball",
+    "mirror tile",
+    "mirror film",
+    "decal",
+    "sticker"
+  ],
+  "sources": [
+    {
+      "id": "garrettwade",
+      "name": "Garrett Wade",
+      "url": "https://www.garrettwade.com",
+      "for": [
+        "claw",
+        "tack",
+        "mallet",
+        "japanese",
+        "specialty"
+      ],
+      "angle": "heirloom",
+      "notes": "Classic catalog of fine tools; strong storytelling copy."
+    },
+    {
+      "id": "leevalley",
+      "name": "Lee Valley",
+      "url": "https://www.leevalley.com",
+      "for": [
+        "claw",
+        "tack",
+        "mallet",
+        "japanese",
+        "ballpeen"
+      ],
+      "angle": "heirloom",
+      "notes": "Canadian fine-tool retailer; ships to US."
+    },
+    {
+      "id": "japanwood",
+      "name": "Japan Woodworker",
+      "url": "https://www.japanwoodworker.com",
+      "for": [
+        "japanese",
+        "mallet"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "hidatool",
+      "name": "Hida Tool",
+      "url": "https://hidatool.com",
+      "for": [
+        "japanese"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "rockler",
+      "name": "Rockler",
+      "url": "https://www.rockler.com",
+      "for": [
+        "mallet",
+        "claw",
+        "tack"
+      ],
+      "angle": "everyday"
+    },
+    {
+      "id": "highland",
+      "name": "Highland Woodworking",
+      "url": "https://www.highlandwoodworking.com",
+      "for": [
+        "mallet",
+        "claw",
+        "japanese"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "vaughan",
+      "name": "Vaughan & Bushnell",
+      "url": "https://www.vaughanmfg.com",
+      "for": [
+        "claw",
+        "framing",
+        "tack",
+        "ballpeen",
+        "specialty"
+      ],
+      "angle": "everyday",
+      "notes": "US maker since 1869; good history angle."
+    },
+    {
+      "id": "estwing",
+      "name": "Estwing",
+      "url": "https://www.estwing.com",
+      "for": [
+        "claw",
+        "framing",
+        "specialty"
+      ],
+      "angle": "everyday",
+      "notes": "Solid-steel hammers and the classic geologist's rock pick."
+    },
+    {
+      "id": "blacksmithsdepot",
+      "name": "Blacksmiths Depot",
+      "url": "https://www.blacksmithsdepot.com",
+      "for": [
+        "smithing"
+      ],
+      "angle": "oddball"
+    },
+    {
+      "id": "centaurforge",
+      "name": "Centaur Forge",
+      "url": "https://www.centaurforge.com",
+      "for": [
+        "smithing"
+      ],
+      "angle": "oddball"
+    },
+    {
+      "id": "ottofrei",
+      "name": "Otto Frei",
+      "url": "https://www.ottofrei.com",
+      "for": [
+        "smithing",
+        "specialty"
+      ],
+      "angle": "oddball",
+      "notes": "Jeweler's chasing and planishing hammers."
+    },
+    {
+      "id": "acehardware",
+      "name": "Ace Hardware",
+      "url": "https://www.acehardware.com",
+      "for": [
+        "claw",
+        "framing",
+        "mallet",
+        "ballpeen"
+      ],
+      "angle": "everyday",
+      "notes": "Big-box sites often block crawlers; may need a network product feed instead."
+    },
+    {
+      "id": "schoolhouse",
+      "name": "Schoolhouse",
+      "url": "https://www.schoolhouse.com",
+      "for": [
+        "round",
+        "arched",
+        "vanity"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "mcgee",
+      "name": "McGee & Co.",
+      "url": "https://www.mcgeeandco.com",
+      "for": [
+        "round",
+        "arched",
+        "floor",
+        "ornate"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "luluandgeorgia",
+      "name": "Lulu and Georgia",
+      "url": "https://www.luluandgeorgia.com",
+      "for": [
+        "round",
+        "arched",
+        "floor",
+        "ornate",
+        "sunburst"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "amber",
+      "name": "Shoppe Amber Interiors",
+      "url": "https://shoppeamberinteriors.com",
+      "for": [
+        "round",
+        "arched",
+        "ornate"
+      ],
+      "angle": "heirloom"
+    },
+    {
+      "id": "article",
+      "name": "Article",
+      "url": "https://www.article.com",
+      "for": [
+        "round",
+        "floor",
+        "arched"
+      ],
+      "angle": "everyday"
+    },
+    {
+      "id": "rejuvenation",
+      "name": "Rejuvenation",
+      "url": "https://www.rejuvenation.com",
+      "for": [
+        "round",
+        "vanity",
+        "convex",
+        "arched"
+      ],
+      "angle": "heirloom",
+      "notes": "Williams-Sonoma family; likely blocks crawlers."
+    },
+    {
+      "id": "westelm",
+      "name": "West Elm",
+      "url": "https://www.westelm.com",
+      "for": [
+        "round",
+        "arched",
+        "floor"
+      ],
+      "angle": "everyday",
+      "notes": "Williams-Sonoma family; likely blocks crawlers."
+    },
+    {
+      "id": "cb2",
+      "name": "CB2",
+      "url": "https://www.cb2.com",
+      "for": [
+        "round",
+        "arched",
+        "floor",
+        "sunburst"
+      ],
+      "angle": "everyday",
+      "notes": "Likely blocks crawlers."
+    },
+    {
+      "id": "simplehuman",
+      "name": "simplehuman",
+      "url": "https://www.simplehuman.com",
+      "for": [
+        "vanity"
+      ],
+      "angle": "everyday"
+    },
+    {
+      "id": "uline",
+      "name": "Uline",
+      "url": "https://www.uline.com",
+      "for": [
+        "convex"
+      ],
+      "angle": "oddball",
+      "notes": "Industrial convex/safety mirrors: the oddball pick."
+    },
+    {
+      "id": "ebay",
+      "name": "eBay",
+      "kind": "api",
+      "for": [
+        "*"
+      ],
+      "angle": "vintage",
+      "notes": "Via our /api/ebay/search once keys are approved."
+    },
+    {
+      "id": "etsy",
+      "name": "Etsy",
+      "kind": "manual",
+      "for": [
+        "*"
+      ],
+      "angle": "vintage",
+      "notes": "Crawling Etsy isn't allowed; Etsy has an approval-gated API. Paste links via /import for now."
+    },
+    {
+      "id": "chairish",
+      "name": "Chairish",
+      "kind": "manual",
+      "for": [
+        "sunburst",
+        "ornate",
+        "convex",
+        "round"
+      ],
+      "angle": "vintage",
+      "notes": "Vintage mirrors; paste links via /import."
+    }
+  ]
+}

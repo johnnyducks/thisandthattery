@@ -278,6 +278,7 @@
       const ship = it.shippingCost === 0 ? `<b class="free">Free shipping</b>` : it.shippingCost == null ? "Shipping calculated" : `+${money(it.shippingCost, it.currency)} shipping`;
       const loc = it.location || {};
       const kitId = `${adapter.id}:${it.id}`;
+      const skim = /[?&]campid=/.test(it.url || "") ? ' class="noskim"' : "";   // already an affiliate link: Skimlinks hands off
       const inKit = window.TT_KIT && TT_KIT.has(kitId);
       return `<li class="mcard" style="--i:${i}">
         <div class="mcard-frame">
@@ -286,7 +287,7 @@
           <span class="mcard-cond">${esc(it.condition)}</span>
         </div>
         <div class="mcard-body">
-          <h3 class="mcard-title"><a href="${esc(it.url)}" target="_blank" rel="sponsored noopener">${esc(it.title)}</a></h3>
+          <h3 class="mcard-title"><a href="${esc(it.url)}"${skim} target="_blank" rel="sponsored noopener">${esc(it.title)}</a></h3>
           <div class="mcard-price">${money(it.price, it.currency)}${auction ? `<small>${it.bids || 0} bid${it.bids === 1 ? "" : "s"}</small>` : ""}</div>
           <ul class="mcard-meta">
             <li>${ship}</li>
@@ -294,7 +295,7 @@
             <li class="seller">${esc(it.seller?.name || "")}${it.seller?.feedbackPct ? ` · ${it.seller.feedbackPct}%` : ""}${it.watchers ? ` · ${it.watchers} watching` : ""}</li>
           </ul>
           <div class="mcard-actions">
-            <a class="btn-shop" href="${esc(it.url)}" target="_blank" rel="sponsored noopener">View on ${esc(label)} <span aria-hidden="true">→</span></a>
+            <a class="btn-shop${skim ? " noskim" : ""}" href="${esc(it.url)}" target="_blank" rel="sponsored noopener">View on ${esc(label)} <span aria-hidden="true">→</span></a>
             ${window.TT_KIT ? `<button type="button" class="btn-kit mkit ${inKit ? "on" : ""}" data-mkit="${esc(it.id)}" aria-pressed="${!!inKit}" aria-label="${inKit ? "Remove from" : "Add to"} kit">${inKit ? "✓" : "+"}</button>` : ""}
           </div>
         </div>

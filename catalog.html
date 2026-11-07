@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Back Room · Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/catalog.css">
+</head>
+<body class="backroom">
+  <header class="br-top">
+    <a class="br-logo" href="index.html" aria-label="Back to the issue"><span class="tt">TT</span></a>
+    <div class="br-title">
+      <div class="br-kicker">The Back Room · Editors only</div>
+      <h1 id="br-h1">Catalog</h1>
+    </div>
+    <button class="br-shortlist-btn" type="button" aria-expanded="false"><span>★</span> Shortlist <b id="sl-count">0</b></button>
+  </header>
+
+  <section class="br-import" aria-label="Add a product by link">
+    <form id="import-form">
+      <label for="import-url">Paste a product link</label>
+      <div class="br-import-row">
+        <input id="import-url" type="url" placeholder="https://www.some-shop.com/products/claw-hammer" required>
+        <button type="submit">Read it →</button>
+      </div>
+    </form>
+    <div id="import-result" aria-live="polite"></div>
+  </section>
+
+  <section class="br-filters" aria-label="Filters">
+    <div class="br-seg" id="f-side" role="radiogroup" aria-label="Side"></div>
+    <div class="br-chips" id="f-type" aria-label="Product types"></div>
+    <div class="br-row">
+      <div class="br-chips" id="f-angle" aria-label="Angles"></div>
+      <label class="br-field"><span>Search</span><input id="f-q" type="search" placeholder="hickory, brass, Japanese…"></label>
+      <label class="br-field small"><span>Min $</span><input id="f-min" type="number" min="0" inputmode="numeric"></label>
+      <label class="br-field small"><span>Max $</span><input id="f-max" type="number" min="0" inputmode="numeric"></label>
+      <label class="br-field"><span>Source</span><select id="f-source"></select></label>
+      <label class="br-field"><span>Sort</span><select id="f-sort">
+        <option value="type">Type</option><option value="priceAsc">Price ↑</option><option value="priceDesc">Price ↓</option><option value="new">Newest</option><option value="rating">Rating</option>
+      </select></label>
+    </div>
+    <p class="br-summary" id="summary" aria-live="polite"></p>
+  </section>
+
+  <main class="br-grid" id="grid"></main>
+  <div class="br-more"><button id="more" type="button" hidden>Show more</button></div>
+
+  <details class="br-sources" id="sources">
+    <summary>Sources: what the last crawl found</summary>
+    <div id="sources-body"></div>
+  </details>
+
+  <aside class="br-drawer" id="drawer" aria-label="Shortlist" hidden>
+    <div class="br-drawer-head">
+      <h2>Shortlist</h2>
+      <button type="button" class="br-x" id="drawer-close" aria-label="Close">×</button>
+    </div>
+    <div id="drawer-body"></div>
+    <div class="br-drawer-foot">
+      <button type="button" id="export">Export for the issue</button>
+      <button type="button" id="clear" class="ghost">Clear</button>
+    </div>
+  </aside>
+
+  <dialog id="export-dlg">
+    <h2>Export</h2>
+    <p>These are your shortlisted products, formatted like the <code>products</code> and <code>retailers</code> in <code>js/issue.js</code>. Paste them in, or send them to Claude to write the story around.</p>
+    <textarea id="export-text" readonly></textarea>
+    <div class="br-dlg-actions"><button type="button" id="copy">Copy</button><button type="button" id="download">Download .json</button><button type="button" class="ghost" id="dlg-close">Close</button></div>
+  </dialog>
+
+  <script src="js/catalog.js"></script>
+</body>
+</html>
