@@ -31,7 +31,7 @@
     const p = P[id]; if (!p) return "";
     if (path === "price") return money(p.price);
     if (path === "retailer") return R[p.retailer].name;
-    if (path === "rating") return `${p.rating}★ <small>(${p.reviews.toLocaleString()})</small>`;
+    if (path === "rating") return p.rating ? `${p.rating}★${p.reviews ? ` <small>(${p.reviews.toLocaleString()})</small>` : ""}` : "Not rated";
     return path.split(".").reduce((o, k) => (o == null ? o : o[k]), p) ?? "";
   }
   function fill(str) {
@@ -55,11 +55,11 @@
         <div class="box-face ${p.image ? "photo" : ""}">${art(p)}</div>
         <span class="box-corner tl"></span><span class="box-corner tr"></span><span class="box-corner bl"></span><span class="box-corner br"></span>
       </div>
-      <div class="tag"><span class="tag-hole"></span><b>${money(p.price)}</b><small>${p.shipping.split(",")[0]}</small></div>
+      <div class="tag"><span class="tag-hole"></span><b>${money(p.price)}</b><small>${p.tag || p.shipping.split(",")[0]}</small></div>
       <figcaption>
         <span class="cap-brand">${p.brand}</span>
         <span class="cap-name">${p.name}</span>
-        <span class="cap-meta"><span class="stars" aria-label="${p.rating} stars">${stars(p.rating)}</span> ${p.rating} · ${p.reviews.toLocaleString()} reviews</span>
+        <span class="cap-meta">${p.rating ? `<span class="stars" aria-label="${p.rating} stars">${stars(p.rating)}</span> ${p.rating}${p.reviews ? ` · ${p.reviews.toLocaleString()} reviews` : ""}` : `Sold by ${R[p.retailer].name}`}</span>
         <span class="cap-actions">
           <a class="btn-shop" href="${p.url}" rel="sponsored noopener" target="_blank">Shop at ${R[p.retailer].name} <span aria-hidden="true">→</span></a>
           <button class="btn-kit" data-kit="${id}" aria-pressed="false"><span class="plus">+</span><span class="lbl">Add to kit</span></button>
@@ -132,10 +132,10 @@
             <div><small>Ships</small>${p.shipping}</div>
             <div><small>Returns</small>${p.returns}</div>
             <div><small>Sold by</small>${r.name}</div>
-            <div><small>Weight</small>${p.specs.Weight}</div>
+            <div><small>Price</small>${money(p.price)}</div>
           </div>
         </div>
-        <div class="ticket-punch">No. ${String(p.reviews).padStart(6, "0")}</div>
+        <div class="ticket-punch">No. ${String([...b.product].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 1e6, 7)).padStart(6, "0")}</div>
       </div>`;
     },
 
@@ -145,7 +145,7 @@
 
   /* ---------------- page ---------------- */
   function cover() {
-    const hero = ["h-claw", "m-orbit"];
+    const hero = I.hero || [Object.keys(P).find(k => P[k].kind === "hammer"), Object.keys(P).find(k => P[k].kind === "mirror")];
     return `<header class="cover" id="top">
       <div class="crop tl"></div><div class="crop tr"></div><div class="crop bl"></div><div class="crop br"></div>
       <div class="masthead">
@@ -223,7 +223,7 @@
 
   const app = $("#app");
   app.innerHTML = cover() + ticker() + `<main id="stories">${I.chapters.map(chapter).join("")}${kitSection()}</main>` +
-    `<footer class="foot"><div class="tt">TT</div><p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}. Product data shown is sample content.</p></footer>` +
+    `<footer class="foot"><div class="tt">TT</div><p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
     rail() + tray();
 
   /* ---------------- kit rendering ---------------- */
@@ -232,7 +232,7 @@
     kit.forEach(id => { const r = P[id].retailer; (g[r] = g[r] || []).push(id); });
     return Object.entries(g).map(([rid, ids]) => {
       const r = R[rid], sub = ids.reduce((s, id) => s + P[id].price, 0);
-      const need = Math.max(0, r.freeShipOver - sub);
+      const need = r.freeShipOver ? Math.max(0, r.freeShipOver - sub) : 0;
       return { rid, r, ids, sub, need, pct: r.freeShipOver ? Math.min(100, (sub / r.freeShipOver) * 100) : 100 };
     });
   }
@@ -243,8 +243,8 @@
     return gs.map(g => `<div class="rcpt-shop">
         <div class="rcpt-shop-head"><b>${g.r.name}</b><span>${money(+g.sub.toFixed(2))}</span></div>
         ${g.ids.map(id => `<div class="rcpt-item"><span>${P[id].brand} ${P[id].short}</span><span>${money(P[id].price)}</span><button data-kit="${id}" aria-label="Remove ${P[id].short}">×</button></div>`).join("")}
-        ${g.r.perItemShipping ? "" : `<div class="ship-bar"><i style="width:${g.pct}%"></i></div>`}
-        <div class="ship-note">${g.r.perItemShipping ? `Shipping varies by seller` : g.need > 0 ? `Add <b>${money(+g.need.toFixed(2))}</b> more for free shipping` : `✓ Ships free`} · ${g.r.returns}</div>
+        ${g.r.perItemShipping || !g.r.freeShipOver ? "" : `<div class="ship-bar"><i style="width:${g.pct}%"></i></div>`}
+        <div class="ship-note">${g.r.perItemShipping ? `Shipping varies by seller` : !g.r.freeShipOver ? (g.r.shippingNote || "Shipping calculated at checkout") : g.need > 0 ? `Add <b>${money(+g.need.toFixed(2))}</b> more for free shipping` : `✓ Ships free`} · ${g.r.returns}</div>
         ${compact ? "" : `<a class="btn-shop" href="#" rel="sponsored noopener">Check out at ${g.r.name} →</a>`}
       </div>`).join("") + `<div class="rcpt-total"><span>Total</span><b>${money(+total.toFixed(2))}</b></div>
       ${compact ? `<a class="btn-shop wide" href="#kit">Review your toolbox →</a>` : ""}`;

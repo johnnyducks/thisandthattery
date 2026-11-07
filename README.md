@@ -134,6 +134,6 @@ the endpoint is unset or fails, the module falls back to sample data and its sta
 
 ## Status
 
-Design and format only. All product data is **sample content**: invented brands, prices and
-terms. Affiliate links point to `#`. Integrations (product feeds, affiliate links, real
-imagery, AI analysis) come later.
+Issue 01 now features **real products** picked from the catalog. Specs come from retailer listings, and
+shipping and return terms from the retailers' policy pages (checked on the date in `asOf`).
+Re-check prices and terms before publishing. Links are plain retailer URLs that Skimlinks monetizes.
