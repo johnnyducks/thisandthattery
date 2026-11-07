@@ -22,6 +22,8 @@ python3 -m http.server 8000
 | `js/issue.js` | **The issue.** Products, retailers and story chapters as data. This is the shape the AI product-analysis step should output. |
 | `js/render.js` | Turns the issue data into the page. Also runs the "kit" (cart-like tray grouped by retailer, with free-shipping progress). |
 | `js/art.js` | Placeholder 1940s-poster product illustrations. Replace with real product images when the feeds are connected. |
+| `js/market.js` | **Marketplace interstitial**: a reusable, searchable carousel micro-app that works with any store through adapters. |
+| `server/ebay-proxy.example.js` | Example server proxy for eBay's Browse API (keeps credentials off the page). Not yet tested against live eBay. |
 | `css/styles.css` | 1940s picture-magazine styling and the extruded 3D box frames. |
 
 ### Story tokens
@@ -36,6 +38,45 @@ You can use these inside any story text in `issue.js`:
 `prose`, `feature` (frame + deep-dive spec sheet), `specimen` (annotated plate with numbered
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
+
+## Marketplace interstitial (`js/market.js`)
+
+A full-width "Intermission" band placed between chapters. It's styled as a 1940s radio console:
+search field, zip code and radius, preset buttons, Buy It Now / Auction toggle, local-pickup
+switch, and sorting. Results show in a swipeable, draggable, keyboard-friendly carousel with
+live auction countdowns. Listings can be added to the page's kit, where they show up in the
+receipt grouped under the platform.
+
+Add one to an issue as an entry in `chapters`:
+
+```js
+{ id: "swapmeet", module: {
+    platform: "ebay",                       // any registered adapter
+    adapter: { endpoint: "/api/ebay/search" },   // leave "" to use sample data
+    kicker: "Intermission", title: "The Swap Meet", dek: "…",
+    defaultQuery: "vintage hammer",
+    presets: ["vintage hammer", "sunburst mirror"]
+} }
+```
+
+**Adding another store or platform:** register an adapter that returns normalized items
+(the format is documented at the top of `market.js`). The controls hide themselves based on the
+adapter's `capabilities`. For example, a store with no auctions or local pickup won't show
+those controls.
+
+```js
+TT_MARKET.register("etsy", opts => ({
+  id: "etsy", label: "Etsy",
+  capabilities: { zip: false, radius: false, pickup: false, auction: false, sorts: ["best", "priceAsc", "priceDesc"] },
+  async search({ q, sort }) { const r = await fetch(`${opts.endpoint}?q=${encodeURIComponent(q)}&sort=${sort}`); return { ...(await r.json()), live: true }; }
+}));
+```
+
+**eBay:** the Browse API needs an OAuth app token, so requests go through a small server proxy
+(`server/ebay-proxy.example.js`). It also passes the eBay Partner Network campaign ID so links
+come back as affiliate links, and the buyer's zip code for shipping estimates. Note that eBay's
+radius search works through local pickup: it finds listings offering pickup within N miles. If
+the endpoint is unset or fails, the module falls back to sample data and its status light says so.
 
 ## Status
 

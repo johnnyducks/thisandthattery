@@ -165,6 +165,20 @@ window.TT_ISSUE = {
       ]
     },
     {
+      id: "swapmeet",
+      module: {
+        // Reusable marketplace interstitial (js/market.js). Swap `platform` for any registered adapter.
+        platform: "ebay",
+        adapter: { endpoint: "" },            // e.g. "/api/ebay/search" once the proxy is deployed; empty = sample data
+        kicker: "Intermission",
+        title: "The Swap Meet",
+        consoleName: "TT Swap Meet",
+        dek: "Before the superstition chapter, a break. These are secondhand hammers and mirrors that strangers are selling right now. Search, set your zip, and see what's nearby.",
+        defaultQuery: "vintage hammer",
+        presets: ["vintage hammer", "sunburst mirror", "tack hammer", "round walnut mirror", "convex mirror", "hammer lot"]
+      }
+    },
+    {
       id: "luck", numeral: "IV", kicker: "Chapter Four", title: "Seven Years",
       dek: "On superstition, rebound, and reading return policies before you swing.",
       blocks: [

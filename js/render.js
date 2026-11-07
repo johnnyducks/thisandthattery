@@ -7,8 +7,21 @@
   /* ---------------- kit state (per-viewer convenience) ---------------- */
   const KEY = "tt-kit-" + I.id;
   let kit = [];
-  try { kit = JSON.parse(localStorage.getItem(KEY) || "[]").filter(id => P[id]); } catch (e) { kit = []; }
-  const saveKit = () => { try { localStorage.setItem(KEY, JSON.stringify(kit)); } catch (e) {} };
+  try {
+    const x = JSON.parse(localStorage.getItem(KEY + "-ext") || "{}");   // items from marketplace modules
+    Object.assign(R, x.retailers || {}); Object.assign(P, x.products || {});
+    kit = JSON.parse(localStorage.getItem(KEY) || "[]").filter(id => P[id]);
+  } catch (e) { kit = []; }
+  const saveKit = () => {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(kit));
+      const ext = { products: {}, retailers: {} };
+      kit.filter(id => P[id].external).forEach(id => { ext.products[id] = P[id]; ext.retailers[P[id].retailer] = R[P[id].retailer]; });
+      localStorage.setItem(KEY + "-ext", JSON.stringify(ext));
+    } catch (e) {}
+  };
+  const listeners = [];
+  const swatch = p => p.external && !p.art ? `<span class="swatch-x">${p.brand.slice(0, 1)}</span>` : TT_ART.render(p);
 
   /* ---------------- tokens ---------------- */
   function field(id, path) {
@@ -151,7 +164,7 @@
         <div class="cover-box b">${box(hero[1], { tilt: 7, size: "lg" })}</div>
       </div>
       <div class="cover-lines">
-        ${I.chapters.map(c => `<a href="#ch-${c.id}"><b>${c.numeral}.</b> ${c.title}</a>`).join("")}
+        ${I.chapters.filter(c => !c.module).map(c => `<a href="#ch-${c.id}"><b>${c.numeral}.</b> ${c.title}</a>`).join("")}
       </div>
     </header>`;
   }
@@ -162,6 +175,7 @@
   }
 
   function chapter(c, i) {
+    if (c.module) return `<section class="interstitial" id="ch-${c.id}" data-module="${c.id}"></section>`;
     return `<section class="chapter ${i % 2 ? "alt" : ""}" id="ch-${c.id}" data-ch="${c.id}">
       <header class="chapter-head">
         <div class="chapter-num">${c.numeral}</div>
@@ -178,11 +192,11 @@
         <div><div class="chapter-kicker">Epilogue</div><h2>The Toolbox</h2><p class="dek">Everything from the story, sorted by shop, with the shipping math done. Tick what you want.</p></div>
       </header>
       <div class="kit-grid">
-        <ol class="kit-list">${Object.entries(P).map(([id, p]) => `
+        <ol class="kit-list">${Object.entries(P).filter(([, p]) => !p.external).map(([id, p]) => `
           <li>
             <label class="kit-row">
               <input type="checkbox" data-kit-check="${id}">
-              <span class="kit-swatch">${TT_ART.render(p)}</span>
+              <span class="kit-swatch">${swatch(p)}</span>
               <span class="kit-info"><b>${p.brand} ${p.name}</b><small>${R[p.retailer].name} · ${p.shipping} · ${p.returns}</small></span>
               <span class="kit-price">${money(p.price)}</span>
             </label>
@@ -194,7 +208,7 @@
   }
 
   function rail() {
-    return `<nav class="rail" aria-label="Chapters">${I.chapters.map(c => `<a href="#ch-${c.id}" data-rail="${c.id}"><span>${c.numeral}</span><em>${c.title}</em></a>`).join("")}<a href="#kit" data-rail="kit"><span>✦</span><em>Toolbox</em></a></nav>`;
+    return `<nav class="rail" aria-label="Chapters">${I.chapters.filter(c => !c.module).map(c => `<a href="#ch-${c.id}" data-rail="${c.id}"><span>${c.numeral}</span><em>${c.title}</em></a>`).join("")}<a href="#kit" data-rail="kit"><span>✦</span><em>Toolbox</em></a></nav>`;
   }
 
   function tray() {
@@ -226,8 +240,8 @@
     return gs.map(g => `<div class="rcpt-shop">
         <div class="rcpt-shop-head"><b>${g.r.name}</b><span>${money(+g.sub.toFixed(2))}</span></div>
         ${g.ids.map(id => `<div class="rcpt-item"><span>${P[id].brand} ${P[id].short}</span><span>${money(P[id].price)}</span><button data-kit="${id}" aria-label="Remove ${P[id].short}">×</button></div>`).join("")}
-        <div class="ship-bar"><i style="width:${g.pct}%"></i></div>
-        <div class="ship-note">${g.need > 0 ? `Add <b>${money(+g.need.toFixed(2))}</b> more for free shipping` : `✓ Ships free`} · ${g.r.returns}</div>
+        ${g.r.perItemShipping ? "" : `<div class="ship-bar"><i style="width:${g.pct}%"></i></div>`}
+        <div class="ship-note">${g.r.perItemShipping ? `Shipping varies by seller` : g.need > 0 ? `Add <b>${money(+g.need.toFixed(2))}</b> more for free shipping` : `✓ Ships free`} · ${g.r.returns}</div>
         ${compact ? "" : `<a class="btn-shop" href="#" rel="sponsored noopener">Check out at ${g.r.name} →</a>`}
       </div>`).join("") + `<div class="rcpt-total"><span>Total</span><b>${money(+total.toFixed(2))}</b></div>
       ${compact ? `<a class="btn-shop wide" href="#kit">Review your toolbox →</a>` : ""}`;
@@ -249,6 +263,7 @@
     $(".tray").classList.toggle("has", kit.length > 0);
     $(".tray-panel").innerHTML = `<div class="tray-head">Your kit <small>${kit.length} item${kit.length === 1 ? "" : "s"}</small></div>` + receiptHTML(true);
     $(".kit-receipt").innerHTML = `<div class="rcpt-head">RECEIPT<small>This &amp; Thattery · No. ${I.number}</small></div>` + receiptHTML(false);
+    listeners.forEach(fn => fn(kit));
   }
 
   function toggle(id, force) {
@@ -299,6 +314,23 @@
   $$(".chapter, .kit-final").forEach(s => railIO.observe(s));
   const coverIO = new IntersectionObserver(([en]) => document.body.classList.toggle("past-cover", !en.isIntersecting));
   coverIO.observe($(".cover"));
+
+  /* ---------------- public kit API (used by marketplace modules) ---------------- */
+  window.TT_KIT = {
+    has: id => kit.includes(id),
+    onChange: fn => listeners.push(fn),
+    toggleExternal(product, retailer) {
+      if (!R[product.retailer]) R[product.retailer] = retailer;
+      if (!P[product.id]) P[product.id] = product;
+      toggle(product.id);
+    }
+  };
+
+  /* ---------------- interstitial modules ---------------- */
+  I.chapters.filter(c => c.module).forEach(c => {
+    const el = document.querySelector(`[data-module="${c.id}"]`);
+    if (el && window.TT_MARKET) TT_MARKET.mount(el, { id: c.id, ...c.module });
+  });
 
   syncKit();
 })();
