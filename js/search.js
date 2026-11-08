@@ -266,7 +266,7 @@
       if ((e.key === "/" && !typing) || (e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey))) { e.preventDefault(); open(); }
     });
     // warm the index once the page is idle so the first search is instant
-    (window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => load().catch(() => {}));
+    if (location.protocol !== "file:") (window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => load().catch(() => {}));
     window.TT_KIT?.onChange?.(() => { if (root && !root.hidden) render(); });
   }
 
