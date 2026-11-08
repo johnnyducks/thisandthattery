@@ -1,0 +1,6 @@
+{
+  "url": "https://thisandthattery.vercel.app",
+  "name": "This & Thattery",
+  "campaign": "issue-01",
+  "note": "Change url to the production domain, then run: node scripts/build-share.js"
+}

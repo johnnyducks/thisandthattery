@@ -59,6 +59,7 @@
       <figcaption>
         <span class="cap-brand">${p.brand}</span>
         <span class="cap-name">${p.name}</span>
+        ${p.aside ? `<span class="aside-other">${p.aside}</span>` : ""}
         <span class="cap-meta">${p.rating ? `<span class="stars" aria-label="${p.rating} stars">${stars(p.rating)}</span> ${p.rating}${p.reviews ? ` · ${p.reviews.toLocaleString()} reviews` : ""}` : `Sold by ${R[p.retailer].name}`}</span>
         <span class="cap-actions">
           <a class="btn-shop" href="${p.url}" rel="sponsored noopener" target="_blank">Shop at ${R[p.retailer].name} <span aria-hidden="true">→</span></a>
@@ -73,6 +74,7 @@
     return `<div class="dive">
       <div class="dive-head">Deep dive · ${p.brand}</div>
       <dl>${Object.entries(p.specs).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      ${p.specAside ? `<p class="aside-other in-spec">${p.specAside}</p>` : ""}
       <ul class="dive-hi">${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
       <p class="ai-note"><span class="label">Analyst's note</span>${p.aiNote}</p>
     </div>`;
@@ -182,7 +184,7 @@
     return `<section class="chapter ${i % 2 ? "alt" : ""}" id="ch-${c.id}" data-ch="${c.id}">
       <header class="chapter-head">
         <div class="chapter-num">${c.numeral}</div>
-        <div><div class="chapter-kicker">${c.kicker}</div><h2>${c.title}</h2><p class="dek">${c.dek}</p></div>
+        <div><div class="chapter-kicker">${c.kicker}</div><h2>${c.title}</h2><p class="dek">${c.dek}</p>${window.TT_SHARE ? TT_SHARE.button(`ch-${c.id}`) : ""}</div>
       </header>
       ${c.blocks.map(b => blocks[b.type](b)).join("")}
     </section>`;
@@ -223,7 +225,7 @@
   const sponsorLink = spon ? { href: `sponsor.html?brand=${SP.active}`, label: spon.name, kicker: spon.paid ? "Sponsor" : "Featured" } : null;
   app.innerHTML = cover() + ticker() + `<main id="stories">${I.chapters.map(chapter).join("")}${kitSection()}</main>` +
     `<section id="newsletter"></section>` +
-    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
+    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p class="aside-other foot-aside">No mirrors were struck in the making of this issue.</p>${window.TT_SHARE ? `<p class="foot-share">${TT_SHARE.button("issue-01", "share this issue")}</p>` : ""}<p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
     tray();
 
   /* ---------------- kit rendering ---------------- */
@@ -274,6 +276,7 @@
     if (want && !has) kit.push(id);
     if (!want && has) kit = kit.filter(k => k !== id);
     syncKit();
+    if (want && !has) window.TT_TRACK?.("Kit add", { product: `${P[id].brand} ${P[id].short}`, shop: (R[P[id].retailer] || {}).name, price: P[id].price });
     if (want && !has) { const t = $(".tray-btn"); t.classList.remove("bump"); void t.offsetWidth; t.classList.add("bump"); }
   }
 
@@ -317,6 +320,7 @@
   /* ---------------- public kit API (used by marketplace modules) ---------------- */
   window.TT_KIT = {
     has: id => kit.includes(id),
+    toggle: id => P[id] && toggle(id),
     onChange: fn => listeners.push(fn),
     toggleExternal(product, retailer) {
       if (!R[product.retailer]) R[product.retailer] = retailer;
@@ -328,8 +332,13 @@
   /* ---------------- interstitial modules ---------------- */
   I.chapters.filter(c => c.module).forEach(c => {
     const el = document.querySelector(`[data-module="${c.id}"]`);
-    if (el && window.TT_MARKET) TT_MARKET.mount(el, { id: c.id, ...c.module });
+    if (el && window.TT_MARKET) {
+      const m = TT_MARKET.mount(el, { id: c.id, ...c.module });
+      if (c.module.platform === "ebay") window.TT_SWAP = q => m.search(q);   // site search hands queries to the Swap Meet
+    }
   });
+  // content is rendered by script, so honour #anchors (e.g. index.html?swap=…#ch-swapmeet) after it exists
+  if (location.hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView());
 
   /* ---------------- site chrome: sticky nav + newsletter ---------------- */
   if (window.TT_SITE) {

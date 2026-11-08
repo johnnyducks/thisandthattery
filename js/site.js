@@ -74,6 +74,7 @@
         const r = await fetch("/api/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, company: form.company.value, source }) });
         const j = await r.json().catch(() => ({}));
         if (!r.ok) throw new Error(j.error || (r.status === 404 ? "Signup isn't switched on yet. Please try again soon." : "Something went wrong. Please try again."));
+        window.TT_TRACK?.("Newsletter signup", { from: source });
         form.reset(); msg.className = "nl-msg good";
         msg.textContent = j.message || "Almost done: check your inbox and click the confirmation link.";
       } catch (err) { msg.className = "nl-msg bad"; msg.textContent = err.message; }

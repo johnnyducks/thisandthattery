@@ -35,6 +35,7 @@ window.TT_ISSUE = {
 
   products: {
     "h-stanley7": {
+      specAside: "Traditional wall mirrors would weigh significantly more.",
       tag: "Free shipping $99+",
       kind: "hammer", art: { type: "tack", handle: "#C9874A", head: "#3A3A3C", bg: "#E9B44C" },
       image: "https://cdn.shopify.com/s/files/1/0904/5167/3370/files/8855927_d.jpg?v=1768341201&width=900",
@@ -46,6 +47,7 @@ window.TT_ISSUE = {
       aiNote: "Highland notes that listed hammer weights are the head only. The whole hammer is about 12 oz, light enough for one-handed picture work."
     },
     "h-stanley16": {
+      aside: "It will not show you your reflection, however hard you look.",
       tag: "Free shipping $99+",
       kind: "hammer", art: { type: "claw", handle: "#A8642F", head: "#4B4B4F", bg: "#D9D2C3" },
       image: "https://cdn.shopify.com/s/files/1/0904/5167/3370/files/171206.jpg?v=1751683446&width=900",
@@ -57,6 +59,7 @@ window.TT_ISSUE = {
       aiNote: "The listing is short: 16 oz head, wooden handle. It's the plain answer, which is sometimes the right one."
     },
     "h-italian": {
+      aside: "It has, to our knowledge, never reflected anything.",
       tag: "90-day returns",
       kind: "hammer", art: { type: "claw", handle: "#8E5A2B", head: "#55575B", bg: "#E2581C" },
       image: "https://cdn.shopify.com/s/files/1/0970/7107/1600/files/CarpenterHammer-gif500_39B0509__88244.1707253893.1280.1280.gif?v=1766156298&width=900",
@@ -68,6 +71,7 @@ window.TT_ISSUE = {
       aiNote: "Garrett Wade's copy opens: \"Some people might find the idea of having a 'favorite hammer' somewhat bizarre.\" They're selling the idea that one is worth having."
     },
     "h-mallet": {
+      aside: "Beechwood is also a poor reflective surface.",
       tag: "90-day returns",
       kind: "hammer", art: { type: "mallet", handle: "#1F1C1A", head: "#C9874A", bg: "#8FA39A" },
       image: "https://cdn.shopify.com/s/files/1/0970/7107/1600/files/83R0203_3-1-2_Inch_BeechwoodMallet_3500A.jpg?v=1784739765&width=900",
@@ -79,6 +83,7 @@ window.TT_ISSUE = {
       aiNote: "Sold alone or as part of a two-mallet set. Twelve ounces of beech taps a hook home without the ring of steel."
     },
     "h-picard": {
+      aside: "The flat peen is not, despite its shape, a very small mirror.",
       tag: "Free shipping $99+",
       kind: "hammer", art: { type: "tack", handle: "#B07A45", head: "#2F2F31", bg: "#D9D2C3" },
       image: "https://cdn.shopify.com/s/files/1/0904/5167/3370/files/161721-01d.jpg?v=1768343530&width=900",
@@ -91,6 +96,7 @@ window.TT_ISSUE = {
     },
 
     "m-laila": {
+      aside: "Completely unsuitable for driving nails.",
       tag: "Shatterproof glass",
       kind: "mirror", art: { type: "round", frame: "#B08A4A", bg: "#2B2826" },
       image: "https://cdn.shopify.com/s/files/1/1496/0124/products/LailaCircleMirror-MMIR0118-ABR-36-MAIN.jpg?v=1644337628&width=900",
@@ -102,6 +108,7 @@ window.TT_ISSUE = {
       aiNote: "The listing doesn't give a weight. Iron and a big pane of glass are not light, so hang it from a stud or a hook rated well above what you think it weighs."
     },
     "m-juliette": {
+      aside: "Convex hammer faces exist too. They reflect nothing.",
       tag: "Convex glass",
       kind: "mirror", art: { type: "convex", frame: "#B08A4A", bg: "#1F3A3D" },
       image: "https://cdn.shopify.com/s/files/1/1496/0124/files/JulietteConvexAntiquedMirror-MMIR0317-VBR-OS-MAIN-T_b5f79ee8-ceaa-4f0b-a2db-6d0a9cf64d1c.jpg?v=1691163196&width=900",
@@ -113,6 +120,7 @@ window.TT_ISSUE = {
       aiNote: "New, not antique: the design \"takes inspiration from antiques.\" Shelf-sized, and the cheapest mirror in this issue apart from a set of plans."
     },
     "m-vallie": {
+      aside: "Unlike a hammer, it should never be swung.",
       tag: "No hammer needed",
       kind: "mirror", art: { type: "arch", frame: "#E9DCC6", bg: "#C9B79C" },
       image: "https://cdn.shopify.com/s/files/1/1496/0124/products/VallieArchedFloorMirror-MMIR0322-LIN-32x72-MAIN.jpg?v=1678916092&width=900",
@@ -124,6 +132,7 @@ window.TT_ISSUE = {
       aiNote: "The splurge of the issue. It leans, so it's the one mirror here you can own without making a hole."
     },
     "m-fold": {
+      aside: "At 10x, even a 7-ounce hammer looks enormous.",
       tag: "45-day returns",
       kind: "mirror", art: { type: "hand", frame: "#9AA0A6", bg: "#F2E3C9" },
       image: "https://cdn.shopify.com/s/files/1/2804/6630/files/front_brushed.png?v=1787378574&width=900",
@@ -135,6 +144,7 @@ window.TT_ISSUE = {
       aiNote: "Built for makeup. At 10x it's also the best splinter-finder in the house, and after Chapter One you may need one."
     },
     "m-courting": {
+      aside: "The only mirror in this issue that weighs less than the hammers.",
       tag: "Plans ship free",
       kind: "mirror", art: { type: "arch", frame: "#6B4226", bg: "#E9B44C" },
       image: "https://cdn.shopify.com/s/files/1/0970/7107/1600/files/12__43229__60396.1593447506.1280.1280.jpg?v=1766154987&width=900",

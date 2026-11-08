@@ -200,7 +200,7 @@
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(storeKey) || "{}"); } catch (e) {}
     const state = {
-      q: cfg.defaultQuery || "", zip: saved.zip || "", radius: saved.radius || 50,
+      q: new URLSearchParams(location.search).get("swap") || cfg.defaultQuery || "", zip: saved.zip || "", radius: saved.radius || 50,
       pickupOnly: false, format: "all", sort: "best", items: [], busy: false, req: 0
     };
     const uid = "m" + Math.random().toString(36).slice(2, 7);
@@ -327,6 +327,8 @@
       status.textContent = res.live ? "On air" : res.fallback ? "Sample data · feed offline" : "Sample data";
       status.dataset.live = !!res.live;
       summary.innerHTML = describe(res);
+      if (state.ran) window.TT_TRACK?.("Swap Meet search", { q: state.q.trim().toLowerCase(), local: !!state.zip, results: res.total, live: !!res.live });
+      state.ran = true;   // the first, automatic load isn't a reader's search
       track.scrollLeft = 0;
       track.innerHTML = res.items.length ? res.items.map(card).join("") : `<li class="mcard-empty">
           <b>Nothing on the shelf.</b> Try a wider radius, drop “local pickup”, or one of these:

@@ -46,6 +46,9 @@ Identical searches are cached at Vercel's edge for 2 minutes to save eBay API qu
 | `scripts/crawl.js` | Catalog crawler (run by `.github/workflows/catalog.yml`). |
 | `catalog.html`, `js/catalog.js` | The Back Room: private catalog browser, shortlist and export. |
 | `api/import.js` | Reads one product page into a catalog item ("Paste a link"). |
+| `js/search.js`, `scripts/build-search-index.js` | Site-wide product search and the index it reads. |
+| `js/analytics.js`, `js/share.js` | Event tracking with social attribution, and the quiet share menu. |
+| `site.config.json`, `scripts/build-share.js`, `scripts/render-share-images.js` | Link previews, per-chapter share pages (`s/`), share images (`share/img/`). |
 | `js/site.js` | Shared site chrome: the thin sticky nav bar and the newsletter form. |
 | `api/subscribe.js`, `api/confirm.js` | Newsletter signup with double opt-in through Mailgun (`api/_lib/mailgun.js`). |
 | `sponsor.html`, `js/sponsors.js` | One-brand collection pages ("Sponsored by" / "Featured brand"). |
@@ -63,6 +66,90 @@ You can use these inside any story text in `issue.js`:
 `prose`, `feature` (frame + deep-dive spec sheet), `specimen` (annotated plate with numbered
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
+
+## Social sharing and analytics
+
+### Link previews
+Every page has Open Graph / Twitter tags with a branded 1200×630 image. Each chapter, lesson and
+brand collection also has its own share page, `s/<slug>.html`, with its own preview image. The share
+page forwards the reader to the right section of the site and keeps the `utm_*` tags.
+
+- Change the domain in `site.config.json`, then run `node scripts/build-share.js`.
+- Images live in `share/img/`: `<slug>.jpg` for link previews and `<slug>-story.jpg` (1080×1920,
+  kept clear of the app's top and bottom bars) for Instagram and TikTok. Re-render after copy
+  changes:
+  `npm i --no-save playwright @fontsource/montserrat @fontsource/playfair-display @fontsource/libre-caslon-text @fontsource/courier-prime && node scripts/render-share-images.js`
+- What's shareable, and the card copy, lives in `scripts/share-entries.js`.
+
+### On-page sharing
+A quiet `↗ share` link sits under each chapter and lesson title, in the footer and on the brand
+page. It opens a text-only menu with no platform logos: Copy link, Share… (the phone's own share
+sheet, which reaches the Instagram, TikTok and Facebook apps), Facebook, Story image (for
+Instagram & TikTok) and Email.
+
+### Analytics (Vercel Web Analytics)
+1. In Vercel, go to Project → **Analytics** → Enable Web Analytics. Page views then work with no
+   cookies and no consent banner. Custom events need the Pro plan.
+2. `js/analytics.js` sends these events. Each carries `src` (first-touch `utm_source` or
+   referring site) and `camp` (`utm_campaign`):
+
+| Event | Data |
+| --- | --- |
+| Shop click | product, shop, where (`index#ch-duel`, `search`, `toolbox`, …) |
+| Kit add | product, shop, price |
+| Search | q, results (logged once the reader pauses typing) |
+| Search learn click / Search to Swap Meet | where the search led |
+| Swap Meet search | q, local (zip used: yes/no, never the zip itself), results |
+| Newsletter signup / Newsletter confirm | page / status |
+| Share | channel (copy, native, facebook, story, email), item |
+| Calculator | which explainer calculator was used |
+| Read depth | page, 25 / 50 / 75 / 100 % |
+
+No emails, zip codes or other personal data are sent. Use `localStorage.setItem("tt-debug","1")`
+to see events in the browser console.
+
+### Link tagging for social posts
+Use the share pages and tag the source, so analytics can split traffic by platform:
+
+| Where | Link |
+| --- | --- |
+| Instagram bio | `/s/issue-01.html?utm_source=instagram&utm_medium=bio&utm_campaign=issue-01` |
+| TikTok bio | `/s/issue-01.html?utm_source=tiktok&utm_medium=bio&utm_campaign=issue-01` |
+| Facebook post about Chapter VI | `/s/learn-hanging.html?utm_source=facebook&utm_medium=post&utm_campaign=issue-01` |
+| Paid posts | `utm_medium=paid` plus `utm_content=<ad name>` |
+
+## House voice: cross-talk asides
+
+The running in-joke: now and then, one dry line measures a product against the *other* half of the
+pairing, usually to point out they have nothing in common. *"Traditional wall mirrors would weigh
+significantly more."*
+
+Where they live: `aside` (under a product in its frame) and `specAside` (end of the spec sheet) on
+products in `js/issue.js` and `js/sponsors.js`, and `<p class="aside-other">` in editorial pages.
+They render small, muted and italic with a faint ↔, so they never compete with the content.
+
+Rules for writers, and for the AI content prompt:
+
+1. **One sentence, at most ~15 words.** Deadpan. No exclamation marks, no puns that need a wink.
+2. **Always true,** usually obviously so. The joke is that it's correct and beside the point.
+   Never invent facts, specs or history for a laugh.
+3. **About the *other* category,** stated as a sober contrast ("Mirrors make poor levers").
+4. **Rare:** at most one per product and one per lesson block. Never in prices, shipping, returns,
+   safety notes or disclosures (except as a closing line after the real safety advice).
+5. **Placed last,** after the useful information, like a footnote you weren't expecting.
+
+## Site search
+
+Always on screen: a **Search** pill bottom-left on every page, a search button in the sticky nav,
+and the shortcuts `/` or Cmd/Ctrl+K. It searches `catalog/search-index.json`, a compact index
+(about 120 KB) of every crawled catalog plus the issue's products, sponsor collections and
+lessons. Results are grouped: **In this issue**, then **Learn**, then one group per product type
+from the pairing briefs, then a "search secondhand on eBay" handoff to the Swap Meet. It tolerates
+partial words and one typo, reads "under $25" in the query as a price filter, and lets readers add
+results to the kit.
+
+The index is rebuilt by `node scripts/build-search-index.js`, which the **Build catalog**
+workflow runs after every crawl. Run it by hand after editing `js/issue.js` or `js/sponsors.js`.
 
 ## Newsletter (Mailgun)
 

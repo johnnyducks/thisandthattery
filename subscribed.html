@@ -26,6 +26,8 @@
     <p id="p">Your subscription is confirmed. The next issue of This &amp; Thattery will find you.</p>
     <a href="index.html">Back to the issue →</a>
   </main>
+  <script src="js/analytics.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
   <script>
     var s = new URLSearchParams(location.search).get("status");
     var copy = {
@@ -33,6 +35,7 @@
       error: ["Something went sideways.", "We couldn't confirm your subscription just now. Please try the link again in a minute."]
     }[s];
     if (copy) { document.getElementById("h").textContent = copy[0]; document.getElementById("p").textContent = copy[1]; }
+    window.TT_TRACK && TT_TRACK("Newsletter confirm", { status: s || "ok" });
   </script>
 </body>
 </html>
