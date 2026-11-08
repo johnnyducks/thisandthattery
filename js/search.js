@@ -173,7 +173,7 @@
     }
     const ebay = document.getElementById("ch-swapmeet") ? `#ch-swapmeet` : `index.html?swap=${encodeURIComponent(q)}#ch-swapmeet`;
     html.push(`<a class="ss-ebay" role="option" href="${esc(ebay)}" data-swap="${esc(q)}"><b>Search secondhand on eBay</b><span>“${esc(q)}” in the Swap Meet →</span></a>`);
-    if (!r.hits.length && !r.learn.length) html.unshift(`<p class="ss-empty">Nothing in our catalog matches “${esc(q)}” yet. Try a broader word, or check secondhand listings below.</p>`);
+    if (!r.hits.length && !r.learn.length) html.unshift(`<p class="ss-empty">Nothing in our catalog matches “${esc(q)}” yet. Try a broader word, or check secondhand listings below.</p><p class="aside-other">We also checked behind the mirrors.</p>`);
     else if (r.loose) html.unshift(`<p class="ss-note">No exact match for every word. Showing close matches.</p>`);
     results.innerHTML = html.join("");
     const n = r.hits.length;

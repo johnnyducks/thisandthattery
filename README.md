@@ -65,6 +65,26 @@ You can use these inside any story text in `issue.js`:
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
 
+## House voice: cross-talk asides
+
+The running in-joke: now and then, one dry line measures a product against the *other* half of the
+pairing, usually to point out they have nothing in common. *"Traditional wall mirrors would weigh
+significantly more."*
+
+Where they live: `aside` (under a product in its frame) and `specAside` (end of the spec sheet) on
+products in `js/issue.js` and `js/sponsors.js`, and `<p class="aside-other">` in editorial pages.
+They render small, muted and italic with a faint ↔, so they never compete with the content.
+
+Rules for writers, and for the AI content prompt:
+
+1. **One sentence, at most ~15 words.** Deadpan. No exclamation marks, no puns that need a wink.
+2. **Always true,** usually obviously so. The joke is that it's correct and beside the point.
+   Never invent facts, specs or history for a laugh.
+3. **About the *other* category,** stated as a sober contrast ("Mirrors make poor levers").
+4. **Rare:** at most one per product and one per lesson block. Never in prices, shipping, returns,
+   safety notes or disclosures (except as a closing line after the real safety advice).
+5. **Placed last,** after the useful information, like a footnote you weren't expecting.
+
 ## Site search
 
 Always on screen: a **Search** pill bottom-left on every page, a search button in the sticky nav,

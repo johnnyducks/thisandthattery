@@ -59,6 +59,7 @@
       <figcaption>
         <span class="cap-brand">${p.brand}</span>
         <span class="cap-name">${p.name}</span>
+        ${p.aside ? `<span class="aside-other">${p.aside}</span>` : ""}
         <span class="cap-meta">${p.rating ? `<span class="stars" aria-label="${p.rating} stars">${stars(p.rating)}</span> ${p.rating}${p.reviews ? ` · ${p.reviews.toLocaleString()} reviews` : ""}` : `Sold by ${R[p.retailer].name}`}</span>
         <span class="cap-actions">
           <a class="btn-shop" href="${p.url}" rel="sponsored noopener" target="_blank">Shop at ${R[p.retailer].name} <span aria-hidden="true">→</span></a>
@@ -73,6 +74,7 @@
     return `<div class="dive">
       <div class="dive-head">Deep dive · ${p.brand}</div>
       <dl>${Object.entries(p.specs).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      ${p.specAside ? `<p class="aside-other in-spec">${p.specAside}</p>` : ""}
       <ul class="dive-hi">${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
       <p class="ai-note"><span class="label">Analyst's note</span>${p.aiNote}</p>
     </div>`;
@@ -223,7 +225,7 @@
   const sponsorLink = spon ? { href: `sponsor.html?brand=${SP.active}`, label: spon.name, kicker: spon.paid ? "Sponsor" : "Featured" } : null;
   app.innerHTML = cover() + ticker() + `<main id="stories">${I.chapters.map(chapter).join("")}${kitSection()}</main>` +
     `<section id="newsletter"></section>` +
-    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
+    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p class="aside-other foot-aside">No mirrors were struck in the making of this issue.</p><p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
     tray();
 
   /* ---------------- kit rendering ---------------- */

@@ -30,6 +30,7 @@
         <span class="cap-brand">${esc(b.name)}</span>
         <span class="cap-name">${esc(p.name)}</span>
         <span class="sp-note">${esc(p.note || "")}</span>
+        ${p.aside ? `<span class="aside-other">${esc(p.aside)}</span>` : ""}
         <span class="cap-actions"><a class="btn-shop" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">Shop at ${esc(b.name)} <span aria-hidden="true">→</span></a></span>
       </figcaption>
     </figure>`;
