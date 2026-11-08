@@ -200,7 +200,7 @@
     let saved = {};
     try { saved = JSON.parse(localStorage.getItem(storeKey) || "{}"); } catch (e) {}
     const state = {
-      q: cfg.defaultQuery || "", zip: saved.zip || "", radius: saved.radius || 50,
+      q: new URLSearchParams(location.search).get("swap") || cfg.defaultQuery || "", zip: saved.zip || "", radius: saved.radius || 50,
       pickupOnly: false, format: "all", sort: "best", items: [], busy: false, req: 0
     };
     const uid = "m" + Math.random().toString(36).slice(2, 7);

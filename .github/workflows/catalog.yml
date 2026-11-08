@@ -45,6 +45,8 @@ jobs:
           args=(--pairing "$PAIRING" --max-pages "$MAX_PAGES")
           if [ -n "$SOURCES" ]; then args+=(--sources "$SOURCES"); fi
           node scripts/crawl.js "${args[@]}"
+      - name: Build search index
+        run: node scripts/build-search-index.js
       - name: Summarize
         env:
           PAIRING: ${{ inputs.pairing || 'hammers-mirrors' }}
@@ -60,7 +62,7 @@ jobs:
         run: |
           git config user.name "tt-catalog-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog/data
+          git add catalog/data catalog/search-index.json
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git commit -m "Catalog: update ${{ inputs.pairing || 'hammers-mirrors' }}"
           git push

@@ -317,6 +317,7 @@
   /* ---------------- public kit API (used by marketplace modules) ---------------- */
   window.TT_KIT = {
     has: id => kit.includes(id),
+    toggle: id => P[id] && toggle(id),
     onChange: fn => listeners.push(fn),
     toggleExternal(product, retailer) {
       if (!R[product.retailer]) R[product.retailer] = retailer;
@@ -328,8 +329,13 @@
   /* ---------------- interstitial modules ---------------- */
   I.chapters.filter(c => c.module).forEach(c => {
     const el = document.querySelector(`[data-module="${c.id}"]`);
-    if (el && window.TT_MARKET) TT_MARKET.mount(el, { id: c.id, ...c.module });
+    if (el && window.TT_MARKET) {
+      const m = TT_MARKET.mount(el, { id: c.id, ...c.module });
+      if (c.module.platform === "ebay") window.TT_SWAP = q => m.search(q);   // site search hands queries to the Swap Meet
+    }
   });
+  // content is rendered by script, so honour #anchors (e.g. index.html?swap=…#ch-swapmeet) after it exists
+  if (location.hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView());
 
   /* ---------------- site chrome: sticky nav + newsletter ---------------- */
   if (window.TT_SITE) {

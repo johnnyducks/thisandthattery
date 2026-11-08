@@ -46,6 +46,7 @@ Identical searches are cached at Vercel's edge for 2 minutes to save eBay API qu
 | `scripts/crawl.js` | Catalog crawler (run by `.github/workflows/catalog.yml`). |
 | `catalog.html`, `js/catalog.js` | The Back Room: private catalog browser, shortlist and export. |
 | `api/import.js` | Reads one product page into a catalog item ("Paste a link"). |
+| `js/search.js`, `scripts/build-search-index.js` | Site-wide product search and the index it reads. |
 | `js/site.js` | Shared site chrome: the thin sticky nav bar and the newsletter form. |
 | `api/subscribe.js`, `api/confirm.js` | Newsletter signup with double opt-in through Mailgun (`api/_lib/mailgun.js`). |
 | `sponsor.html`, `js/sponsors.js` | One-brand collection pages ("Sponsored by" / "Featured brand"). |
@@ -63,6 +64,19 @@ You can use these inside any story text in `issue.js`:
 `prose`, `feature` (frame + deep-dive spec sheet), `specimen` (annotated plate with numbered
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
+
+## Site search
+
+Always on screen: a **Search** pill bottom-left on every page, a search button in the sticky nav,
+and the shortcuts `/` or Cmd/Ctrl+K. It searches `catalog/search-index.json`, a compact index
+(about 120 KB) of every crawled catalog plus the issue's products, sponsor collections and
+lessons. Results are grouped: **In this issue**, then **Learn**, then one group per product type
+from the pairing briefs, then a "search secondhand on eBay" handoff to the Swap Meet. It tolerates
+partial words and one typo, reads "under $25" in the query as a price filter, and lets readers add
+results to the kit.
+
+The index is rebuilt by `node scripts/build-search-index.js`, which the **Build catalog**
+workflow runs after every crawl. Run it by hand after editing `js/issue.js` or `js/sponsors.js`.
 
 ## Newsletter (Mailgun)
 
