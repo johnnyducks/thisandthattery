@@ -154,6 +154,8 @@
       return;
     }
     const r = search(q, filt);
+    clearTimeout(render._t);   // log the query once the reader pauses typing
+    render._t = setTimeout(() => { if (q.length > 1 && q !== render._last) { render._last = q; window.TT_TRACK?.("Search", { q: q.toLowerCase(), results: r.hits.length }); } }, 1200);
     const html = [];
     const story = r.hits.filter(i => i.st);
     if (story.length) html.push(`<div class="ss-group"><h3>In this issue <small>${story.length}</small></h3>${story.map(i => row(i, r.qt)).join("")}</div>`);
@@ -205,7 +207,9 @@
       remember(); render(); return;
     }
     const sw = t.closest("[data-swap]");
+    if (sw) window.TT_TRACK?.("Search to Swap Meet", { q: sw.dataset.swap.toLowerCase() });
     if (sw && document.getElementById("ch-swapmeet")) { e.preventDefault(); remember(); close(); window.TT_SWAP?.(sw.dataset.swap); document.getElementById("ch-swapmeet").scrollIntoView({ behavior: "smooth" }); return; }
+    if (t.closest(".ss-learn")) window.TT_TRACK?.("Search learn click", { to: t.closest(".ss-learn").getAttribute("href") });
     if (t.closest(".ss-main, .ss-learn")) remember();
   }
 

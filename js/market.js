@@ -327,6 +327,8 @@
       status.textContent = res.live ? "On air" : res.fallback ? "Sample data · feed offline" : "Sample data";
       status.dataset.live = !!res.live;
       summary.innerHTML = describe(res);
+      if (state.ran) window.TT_TRACK?.("Swap Meet search", { q: state.q.trim().toLowerCase(), local: !!state.zip, results: res.total, live: !!res.live });
+      state.ran = true;   // the first, automatic load isn't a reader's search
       track.scrollLeft = 0;
       track.innerHTML = res.items.length ? res.items.map(card).join("") : `<li class="mcard-empty">
           <b>Nothing on the shelf.</b> Try a wider radius, drop “local pickup”, or one of these:

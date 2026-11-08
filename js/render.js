@@ -184,7 +184,7 @@
     return `<section class="chapter ${i % 2 ? "alt" : ""}" id="ch-${c.id}" data-ch="${c.id}">
       <header class="chapter-head">
         <div class="chapter-num">${c.numeral}</div>
-        <div><div class="chapter-kicker">${c.kicker}</div><h2>${c.title}</h2><p class="dek">${c.dek}</p></div>
+        <div><div class="chapter-kicker">${c.kicker}</div><h2>${c.title}</h2><p class="dek">${c.dek}</p>${window.TT_SHARE ? TT_SHARE.button(`ch-${c.id}`) : ""}</div>
       </header>
       ${c.blocks.map(b => blocks[b.type](b)).join("")}
     </section>`;
@@ -225,7 +225,7 @@
   const sponsorLink = spon ? { href: `sponsor.html?brand=${SP.active}`, label: spon.name, kicker: spon.paid ? "Sponsor" : "Featured" } : null;
   app.innerHTML = cover() + ticker() + `<main id="stories">${I.chapters.map(chapter).join("")}${kitSection()}</main>` +
     `<section id="newsletter"></section>` +
-    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p class="aside-other foot-aside">No mirrors were struck in the making of this issue.</p><p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
+    `<footer class="foot"><div class="tt">TT</div>${sponsorLink ? `<p class="foot-sponsor"><a href="${sponsorLink.href}">${spon.paid ? "Sponsored by" : "Featured brand:"} <b>${spon.name}</b>. See the collection →</a></p>` : ""}<p class="aside-other foot-aside">No mirrors were struck in the making of this issue.</p>${window.TT_SHARE ? `<p class="foot-share">${TT_SHARE.button("issue-01", "share this issue")}</p>` : ""}<p>This &amp; Thattery is reader-supported. When you buy through links on this page we may earn an affiliate commission, at no extra cost to you. Prices, shipping and return terms were accurate when the issue went to press. Check the retailer before you buy.</p><p class="fine">Issue ${I.number}: ${I.this} &amp; ${I.that}.${I.asOf ? ` Prices and terms checked ${I.asOf}.` : ""}${I.sample ? " Product data shown is sample content." : ""}</p></footer>` +
     tray();
 
   /* ---------------- kit rendering ---------------- */
@@ -276,6 +276,7 @@
     if (want && !has) kit.push(id);
     if (!want && has) kit = kit.filter(k => k !== id);
     syncKit();
+    if (want && !has) window.TT_TRACK?.("Kit add", { product: `${P[id].brand} ${P[id].short}`, shop: (R[P[id].retailer] || {}).name, price: P[id].price });
     if (want && !has) { const t = $(".tray-btn"); t.classList.remove("bump"); void t.offsetWidth; t.classList.add("bump"); }
   }
 

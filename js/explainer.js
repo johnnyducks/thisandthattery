@@ -281,6 +281,13 @@
   const rv = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); rv.unobserve(en.target); } }), { rootMargin: "0px 0px -10% 0px" });
   $$(".plate, .tryit, .fieldnote, .shelf, .fcard").forEach(el => { el.classList.add("rv2"); rv.observe(el); });
 
+  // quiet share links in each lesson header, tracking for the calculators
+  if (window.TT_SHARE) {
+    $$(".x-ch[id]").forEach(sec => { const box = sec.querySelector(".x-head > div"); if (box) box.insertAdjacentHTML("beforeend", TT_SHARE.button(`learn-${sec.id}`)); });
+    $(".x-cover-main")?.insertAdjacentHTML("beforeend", `<p class="x-share">${TT_SHARE.button("explainer", "share the explainer")}</p>`);
+  }
+  $$(".tryit").forEach(t => t.addEventListener("input", () => window.TT_TRACK?.("Calculator", { name: t.id.replace("try-", "") }), { once: true }));
+
   // site chrome
   if (window.TT_SITE) {
     TT_SITE.nav({ links: [["anatomy", "I", "Anatomy"], ["physics", "II", "Physics"], ["faces", "III", "Faces"], ["lever", "IV", "Lever"], ["handles", "V", "Handles"], ["hanging", "VI", "Hanging"], ["spectrum", "VII", "Spectrum"]]

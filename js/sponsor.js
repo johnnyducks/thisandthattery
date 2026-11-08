@@ -46,6 +46,7 @@
         <span><small>Returns</small>${esc(b.terms?.returns || "See retailer")}</span>
         <span><small>Pieces</small>${b.products.length}</span>
       </div>
+      ${window.TT_SHARE ? `<p class="sp-share">${TT_SHARE.button("brand-" + id, "share this collection")}</p>` : ""}
     </header>
     <main class="sp-main">
       <section class="sp-intro"><p>${esc(b.intro || "")}</p>
