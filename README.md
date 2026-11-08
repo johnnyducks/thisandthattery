@@ -46,6 +46,9 @@ Identical searches are cached at Vercel's edge for 2 minutes to save eBay API qu
 | `scripts/crawl.js` | Catalog crawler (run by `.github/workflows/catalog.yml`). |
 | `catalog.html`, `js/catalog.js` | The Back Room: private catalog browser, shortlist and export. |
 | `api/import.js` | Reads one product page into a catalog item ("Paste a link"). |
+| `js/site.js` | Shared site chrome: the thin sticky nav bar and the newsletter form. |
+| `api/subscribe.js`, `api/confirm.js` | Newsletter signup with double opt-in through Mailgun (`api/_lib/mailgun.js`). |
+| `sponsor.html`, `js/sponsors.js` | One-brand collection pages ("Sponsored by" / "Featured brand"). |
 | `css/styles.css` | 1940s picture-magazine styling and the extruded 3D box frames. |
 
 ### Story tokens
@@ -60,6 +63,36 @@ You can use these inside any story text in `issue.js`:
 `prose`, `feature` (frame + deep-dive spec sheet), `specimen` (annotated plate with numbered
 callouts), `duel` (side-by-side comparison), `pair`, `ticket` (shipping/returns fine print),
 `pullquote`, `collage`.
+
+## Newsletter (Mailgun)
+
+The signup form (`#newsletter`, linked from the nav bar's **Subscribe** button) uses **double opt-in**:
+
+1. `POST /api/subscribe` adds the address to the Mailgun list as *not subscribed* and emails a confirmation link.
+2. The link (`/api/confirm?token=…`, signed, valid for 3 days) marks them subscribed and lands on `/subscribed.html`.
+
+Bots that fill the hidden field are quietly ignored. Without the env vars below, the form says
+signup isn't switched on yet.
+
+| Env var | Value |
+| --- | --- |
+| `MAILGUN_API_KEY` | Private API key (Mailgun → API Security) |
+| `MAILGUN_DOMAIN` | Verified sending domain, e.g. `mg.thisandthattery.com` |
+| `MAILGUN_LIST` | Mailing list address, e.g. `dispatch@mg.thisandthattery.com` |
+| `MAILGUN_FROM` | e.g. `This & Thattery <dispatch@mg.thisandthattery.com>` |
+| `NEWSLETTER_SECRET` | Long random string (signs confirmation links) |
+| `SITE_URL` | Your production URL, e.g. `https://thisandthattery.com` |
+| `MAILGUN_REGION` | Optional: `eu` if the Mailgun account is in the EU region |
+
+To send an issue, email the list address from Mailgun (or its API). Include `%mailing_list_unsubscribe_url%`
+in every newsletter so readers can unsubscribe, which is required by law.
+
+## Sponsor / featured-brand pages
+
+`sponsor.html?brand=<id>` renders one brand's collection from `js/sponsors.js`. The nav bar, cover
+nav ("Brands") and footer link to `active`. Set `paid: true` only for a real paid sponsorship: it
+switches the label to "Sponsored by …" and shows a sponsorship disclosure (FTC rules). The included
+Garrett Wade collection is an **unpaid example**, labelled "Featured brand".
 
 ## Catalog pipeline (finding real products)
 
