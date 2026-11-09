@@ -1,7 +1,188 @@
 {
   "pairing": "hammers-mirrors",
-  "ranAt": "2026-11-07T17:52:42.135Z",
+  "ranAt": "2026-11-09T20:00:03.488Z",
   "sources": [
+    {
+      "id": "hidatool",
+      "name": "Hida Tool",
+      "method": "sitemap",
+      "fetched": 5,
+      "found": 0,
+      "kept": 0,
+      "errors": [],
+      "startedAt": "2026-11-09T19:53:54.487Z",
+      "robotsStatus": 404,
+      "sitemaps": [
+        {
+          "url": "https://hidatool.com/sitemap.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://hidatool.com/sitemap_index.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://hidatool.com/sitemap-index.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://hidatool.com/product-sitemap.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        }
+      ],
+      "candidates": 0
+    },
+    {
+      "id": "japanwood",
+      "name": "Japan Woodworker",
+      "method": "sitemap",
+      "fetched": 5,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap had no URLs (text/html): https://www.japanwoodworker.com/sitemap.xml",
+        "sitemap had no URLs (text/html): https://www.japanwoodworker.com/sitemap_index.xml",
+        "sitemap had no URLs (text/html): https://www.japanwoodworker.com/sitemap-index.xml",
+        "sitemap had no URLs (text/html): https://www.japanwoodworker.com/product-sitemap.xml"
+      ],
+      "startedAt": "2026-11-09T19:53:54.486Z",
+      "sitemaps": [
+        {
+          "url": "https://www.japanwoodworker.com/sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.japanwoodworker.com/sitemap_index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.japanwoodworker.com/sitemap-index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.japanwoodworker.com/product-sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        }
+      ],
+      "candidates": 0
+    },
+    {
+      "id": "rockler",
+      "name": "Rockler",
+      "method": "sitemap",
+      "fetched": 5,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "robots: UND_ERR_HEADERS_OVERFLOW"
+      ],
+      "startedAt": "2026-11-09T19:53:56.792Z",
+      "sitemaps": [
+        {
+          "url": "https://www.rockler.com/sitemap.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.rockler.com/sitemap_index.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.rockler.com/sitemap-index.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.rockler.com/product-sitemap.xml",
+          "status": 404,
+          "locs": 0,
+          "index": false
+        }
+      ],
+      "candidates": 0
+    },
+    {
+      "id": "garrettwade",
+      "name": "Garrett Wade",
+      "method": "shopify-feed",
+      "fetched": 5,
+      "found": 1113,
+      "kept": 8,
+      "errors": [],
+      "startedAt": "2026-11-09T19:53:54.429Z"
+    },
+    {
+      "id": "vaughan",
+      "name": "Vaughan & Bushnell",
+      "method": "sitemap",
+      "fetched": 5,
+      "found": 0,
+      "kept": 0,
+      "errors": [
+        "sitemap had no URLs (text/html): https://www.vaughanmfg.com/sitemap.xml",
+        "sitemap had no URLs (text/html): https://www.vaughanmfg.com/sitemap_index.xml",
+        "sitemap had no URLs (text/html): https://www.vaughanmfg.com/sitemap-index.xml",
+        "sitemap had no URLs (text/html): https://www.vaughanmfg.com/product-sitemap.xml"
+      ],
+      "startedAt": "2026-11-09T19:54:00.116Z",
+      "sitemaps": [
+        {
+          "url": "https://www.vaughanmfg.com/sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.vaughanmfg.com/sitemap_index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.vaughanmfg.com/sitemap-index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://www.vaughanmfg.com/product-sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        }
+      ],
+      "candidates": 0
+    },
+    {
+      "id": "highland",
+      "name": "Highland Woodworking",
+      "method": "shopify-feed",
+      "fetched": 17,
+      "found": 4246,
+      "kept": 18,
+      "errors": [],
+      "startedAt": "2026-11-09T19:53:58.888Z"
+    },
     {
       "id": "leevalley",
       "name": "Lee Valley",
@@ -12,92 +193,37 @@
       "errors": [
         "sitemap 429: https://www.leevalley.com/sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:49:06.868Z",
+      "startedAt": "2026-11-09T19:53:54.484Z",
+      "robotsStatus": 429,
+      "sitemaps": [
+        {
+          "url": "https://www.leevalley.com/sitemap.xml",
+          "status": 429,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "blocked": true,
       "candidates": 0
     },
     {
-      "id": "hidatool",
-      "name": "Hida Tool",
+      "id": "blacksmithsdepot",
+      "name": "Blacksmiths Depot",
       "method": "sitemap",
-      "fetched": 2,
-      "found": 0,
-      "kept": 0,
-      "errors": [
-        "sitemap 404: https://hidatool.com/sitemap.xml"
+      "fetched": 108,
+      "found": 106,
+      "kept": 99,
+      "errors": [],
+      "startedAt": "2026-11-09T19:54:04.186Z",
+      "sitemaps": [
+        {
+          "url": "https://blacksmithsdepot.com/sitemap.xml",
+          "status": 200,
+          "locs": 1327,
+          "index": false
+        }
       ],
-      "startedAt": "2026-11-07T17:49:06.871Z",
-      "candidates": 0
-    },
-    {
-      "id": "japanwood",
-      "name": "Japan Woodworker",
-      "method": "sitemap",
-      "fetched": 2,
-      "found": 0,
-      "kept": 0,
-      "errors": [],
-      "startedAt": "2026-11-07T17:49:06.870Z",
-      "candidates": 0
-    },
-    {
-      "id": "rockler",
-      "name": "Rockler",
-      "method": "sitemap",
-      "fetched": 2,
-      "found": 0,
-      "kept": 0,
-      "errors": [
-        "robots: fetch failed",
-        "sitemap 404: https://www.rockler.com/sitemap.xml"
-      ],
-      "startedAt": "2026-11-07T17:49:07.191Z",
-      "candidates": 0
-    },
-    {
-      "id": "vaughan",
-      "name": "Vaughan & Bushnell",
-      "method": "sitemap",
-      "fetched": 2,
-      "found": 0,
-      "kept": 0,
-      "errors": [],
-      "startedAt": "2026-11-07T17:49:08.171Z",
-      "candidates": 0
-    },
-    {
-      "id": "garrettwade",
-      "name": "Garrett Wade",
-      "method": "shopify-feed",
-      "fetched": 5,
-      "found": 1113,
-      "kept": 16,
-      "errors": [],
-      "startedAt": "2026-11-07T17:49:06.826Z"
-    },
-    {
-      "id": "highland",
-      "name": "Highland Woodworking",
-      "method": "shopify-feed",
-      "fetched": 12,
-      "found": 3000,
-      "kept": 23,
-      "errors": [],
-      "startedAt": "2026-11-07T17:49:07.576Z"
-    },
-    {
-      "id": "ottofrei",
-      "name": "Otto Frei",
-      "method": "sitemap",
-      "fetched": 11,
-      "found": 0,
-      "kept": 0,
-      "errors": [
-        "sitemap 403: https://www.ottofrei.com/es/sitemap_products_1.xml?from=7664265461974&to=7851722211542"
-      ],
-      "startedAt": "2026-11-07T17:49:25.342Z",
-      "blocked": true,
-      "candidates": 319
+      "candidates": 106
     },
     {
       "id": "acehardware",
@@ -109,7 +235,15 @@
       "errors": [
         "sitemap 403: https://www.acehardware.com/sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:49:36.231Z",
+      "startedAt": "2026-11-09T19:56:49.103Z",
+      "sitemaps": [
+        {
+          "url": "https://www.acehardware.com/sitemap.xml",
+          "status": 403,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "blocked": true,
       "candidates": 0
     },
@@ -121,17 +255,17 @@
       "found": 265,
       "kept": 9,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:36.602Z"
+      "startedAt": "2026-11-09T19:56:49.392Z"
     },
     {
       "id": "mcgee",
       "name": "McGee & Co.",
       "method": "shopify-feed",
       "fetched": 12,
-      "found": 2928,
-      "kept": 77,
+      "found": 2923,
+      "kept": 65,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:38.919Z"
+      "startedAt": "2026-11-09T19:56:51.507Z"
     },
     {
       "id": "luluandgeorgia",
@@ -139,22 +273,71 @@
       "method": "shopify-feed",
       "fetched": 3,
       "found": 749,
-      "kept": 42,
+      "kept": 11,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:56.162Z"
+      "startedAt": "2026-11-09T19:57:09.128Z"
     },
     {
       "id": "amber",
       "name": "Shoppe Amber Interiors",
       "method": "sitemap",
-      "fetched": 2,
+      "fetched": 5,
       "found": 0,
       "kept": 0,
       "errors": [
-        "feed: Unexpected token '<', \"<!doctype \"... is not valid JSON"
+        "feed: Unexpected token '<', \"<!doctype \"... is not valid JSON",
+        "sitemap had no URLs (text/html): https://shoppeamberinteriors.com/sitemap.xml",
+        "sitemap had no URLs (text/html): https://shoppeamberinteriors.com/sitemap_index.xml",
+        "sitemap had no URLs (text/html): https://shoppeamberinteriors.com/sitemap-index.xml",
+        "sitemap had no URLs (text/html): https://shoppeamberinteriors.com/product-sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:50:00.570Z",
+      "startedAt": "2026-11-09T19:57:14.251Z",
+      "sitemaps": [
+        {
+          "url": "https://shoppeamberinteriors.com/sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://shoppeamberinteriors.com/sitemap_index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://shoppeamberinteriors.com/sitemap-index.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        },
+        {
+          "url": "https://shoppeamberinteriors.com/product-sitemap.xml",
+          "status": 200,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "candidates": 0
+    },
+    {
+      "id": "centaurforge",
+      "name": "Centaur Forge",
+      "method": "sitemap",
+      "fetched": 114,
+      "found": 112,
+      "kept": 69,
+      "errors": [],
+      "startedAt": "2026-11-09T19:54:24.510Z",
+      "sitemaps": [
+        {
+          "url": "https://www.centaurforge.com/sitemap.xml",
+          "status": 200,
+          "locs": 2515,
+          "index": false
+        }
+      ],
+      "candidates": 112
     },
     {
       "id": "article",
@@ -163,8 +346,18 @@
       "fetched": 2,
       "found": 0,
       "kept": 0,
-      "errors": [],
-      "startedAt": "2026-11-07T17:50:03.253Z",
+      "errors": [
+        "sitemap had no URLs (text/html): https://www.article.com/sitemap.xml"
+      ],
+      "startedAt": "2026-11-09T19:57:24.992Z",
+      "sitemaps": [
+        {
+          "url": "https://www.article.com/sitemap.xml",
+          "status": 202,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "candidates": 0
     },
     {
@@ -177,7 +370,16 @@
       "errors": [
         "sitemap 403: https://www.rejuvenation.com/sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:50:03.969Z",
+      "startedAt": "2026-11-09T19:57:25.651Z",
+      "robotsStatus": 403,
+      "sitemaps": [
+        {
+          "url": "https://www.rejuvenation.com/sitemap.xml",
+          "status": 403,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "blocked": true,
       "candidates": 0
     },
@@ -191,7 +393,16 @@
       "errors": [
         "sitemap 403: https://www.westelm.com/sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:50:04.439Z",
+      "startedAt": "2026-11-09T19:57:25.724Z",
+      "robotsStatus": 403,
+      "sitemaps": [
+        {
+          "url": "https://www.westelm.com/sitemap.xml",
+          "status": 403,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "blocked": true,
       "candidates": 0
     },
@@ -205,37 +416,55 @@
       "errors": [
         "sitemap 403: https://www.cb2.com/sitemap.xml"
       ],
-      "startedAt": "2026-11-07T17:50:04.783Z",
+      "startedAt": "2026-11-09T19:57:25.843Z",
+      "robotsStatus": 403,
+      "sitemaps": [
+        {
+          "url": "https://www.cb2.com/sitemap.xml",
+          "status": 403,
+          "locs": 0,
+          "index": false
+        }
+      ],
       "blocked": true,
       "candidates": 0
     },
     {
-      "id": "simplehuman",
-      "name": "simplehuman",
-      "method": "shopify-feed",
-      "fetched": 2,
-      "found": 350,
-      "kept": 24,
-      "errors": [],
-      "startedAt": "2026-11-07T17:50:05.081Z"
-    },
-    {
-      "id": "uline",
-      "name": "Uline",
+      "id": "estwing",
+      "name": "Estwing",
       "method": "sitemap",
-      "fetched": 8,
-      "found": 0,
-      "kept": 0,
-      "errors": [
-        "sitemap 406: https://www.uline.com/sitemap-us-product.xml.gz",
-        "sitemap 406: https://www.uline.com/sitemap1.xml.gz",
-        "sitemap 406: https://www.uline.com/sitemap-us-homepage.xml.gz",
-        "sitemap 406: https://www.uline.com/sitemap-us-class.xml.gz",
-        "sitemap 406: https://www.uline.com/sitemap-us-group.xml.gz",
-        "sitemap 406: https://www.uline.com/sitemap-us-subgroup.xml.gz"
+      "fetched": 121,
+      "found": 116,
+      "kept": 71,
+      "errors": [],
+      "startedAt": "2026-11-09T19:54:00.877Z",
+      "sitemaps": [
+        {
+          "url": "https://www.estwing.com/sitemap_index.xml",
+          "status": 200,
+          "locs": 9,
+          "index": true
+        },
+        {
+          "url": "https://www.estwing.com/product-sitemap.xml",
+          "status": 200,
+          "locs": 156,
+          "index": false
+        },
+        {
+          "url": "https://www.estwing.com/product_tag-sitemap.xml",
+          "status": 200,
+          "locs": 4,
+          "index": false
+        },
+        {
+          "url": "https://www.estwing.com/wpdmpro-sitemap.xml",
+          "status": 200,
+          "locs": 84,
+          "index": false
+        }
       ],
-      "startedAt": "2026-11-07T17:50:07.096Z",
-      "candidates": 0
+      "candidates": 116
     },
     {
       "id": "ebay",
@@ -245,7 +474,7 @@
       "found": 0,
       "kept": 0,
       "errors": [],
-      "startedAt": "2026-11-07T17:50:09.214Z",
+      "startedAt": "2026-11-09T19:57:27.142Z",
       "note": "Via our /api/ebay/search once keys are approved."
     },
     {
@@ -256,7 +485,7 @@
       "found": 0,
       "kept": 0,
       "errors": [],
-      "startedAt": "2026-11-07T17:50:09.214Z",
+      "startedAt": "2026-11-09T19:57:27.143Z",
       "note": "Crawling Etsy isn't allowed; Etsy has an approval-gated API. Paste links via /import for now."
     },
     {
@@ -267,41 +496,146 @@
       "found": 0,
       "kept": 0,
       "errors": [],
-      "startedAt": "2026-11-07T17:50:09.214Z",
+      "startedAt": "2026-11-09T19:57:27.143Z",
       "note": "Vintage mirrors; paste links via /import."
     },
     {
-      "id": "centaurforge",
-      "name": "Centaur Forge",
-      "method": "sitemap",
-      "fetched": 114,
-      "found": 112,
-      "kept": 88,
+      "id": "simplehuman",
+      "name": "simplehuman",
+      "method": "shopify-feed",
+      "fetched": 2,
+      "found": 350,
+      "kept": 23,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:13.176Z",
-      "candidates": 112
+      "startedAt": "2026-11-09T19:57:25.905Z"
     },
     {
-      "id": "blacksmithsdepot",
-      "name": "Blacksmiths Depot",
+      "id": "ottofrei",
+      "name": "Otto Frei",
       "method": "sitemap",
-      "fetched": 108,
-      "found": 106,
-      "kept": 97,
+      "fetched": 130,
+      "found": 120,
+      "kept": 102,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:09.565Z",
-      "candidates": 106
+      "startedAt": "2026-11-09T19:54:34.774Z",
+      "sitemaps": [
+        {
+          "url": "https://www.ottofrei.com/sitemap.xml",
+          "status": 200,
+          "locs": 85,
+          "index": true
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_1.xml?from=7664265461974&to=7851722211542",
+          "status": 200,
+          "locs": 1001,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_2.xml?from=7851722309846&to=7852039110870",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_3.xml?from=7852039143638&to=7852442943702",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_4.xml?from=7852443467990&to=7853187563734",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_5.xml?from=7853188546774&to=7853634519254",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_6.xml?from=7853635076310&to=7889263821014",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_7.xml?from=7889263853782&to=7934809309398",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_8.xml?from=7934809440470&to=9153623130326",
+          "status": 200,
+          "locs": 1000,
+          "index": false
+        },
+        {
+          "url": "https://www.ottofrei.com/sitemap_products_9.xml?from=9153804763350&to=15436598804694",
+          "status": 200,
+          "locs": 286,
+          "index": false
+        }
+      ],
+      "candidates": 319
     },
     {
-      "id": "estwing",
-      "name": "Estwing",
+      "id": "uline",
+      "name": "Uline",
       "method": "sitemap",
-      "fetched": 121,
-      "found": 116,
-      "kept": 71,
+      "fetched": 109,
+      "found": 101,
+      "kept": 79,
       "errors": [],
-      "startedAt": "2026-11-07T17:49:08.272Z",
-      "candidates": 116
+      "startedAt": "2026-11-09T19:57:26.078Z",
+      "sitemaps": [
+        {
+          "url": "http://www.uline.com/sitemapindex.xml",
+          "status": 200,
+          "locs": 7,
+          "index": true
+        },
+        {
+          "url": "https://www.uline.com/sitemap-us-product.xml.gz",
+          "status": 200,
+          "locs": 49364,
+          "index": false
+        },
+        {
+          "url": "https://www.uline.com/sitemap1.xml.gz",
+          "status": 200,
+          "locs": 5557,
+          "index": false
+        },
+        {
+          "url": "https://www.uline.com/sitemap-us-homepage.xml.gz",
+          "status": 200,
+          "locs": 1,
+          "index": false
+        },
+        {
+          "url": "https://www.uline.com/sitemap-us-class.xml.gz",
+          "status": 200,
+          "locs": 60,
+          "index": false
+        },
+        {
+          "url": "https://www.uline.com/sitemap-us-group.xml.gz",
+          "status": 200,
+          "locs": 664,
+          "index": false
+        },
+        {
+          "url": "https://www.uline.com/sitemap-us-subgroup.xml.gz",
+          "status": 200,
+          "locs": 5020,
+          "index": false
+        }
+      ],
+      "candidates": 101
     }
   ]
 }
